@@ -47,6 +47,7 @@ alt_u32 interrupt_handler(void* context);
 alt_alarm alarm;
 
 int run_queue[NUMTHREADS];
+int run_queue_count;
 
 int main()
 {
@@ -71,11 +72,26 @@ tcb * mythread_create(int thread_id)
 	// TODO: Free bird!
 	tcb *thread = (tcb *)malloc(sizeof(tcb));
 	thread->thread_id = thread_id;
-	// Add thread to run_queue
+	// add thread to run_queue
 	run_queue[thread_id] = thread;
+	run_queue_count++;
 	// thread has been added to queue; set its status to scheduled
 	thread->status = thread_status.scheduled;
 	return &thread;
+}
+
+void * mythread_scheduler(void *context)
+{
+	// do the necessary setup
+	if(run_queue_count > 0)
+	{
+		// suspend the current thread and schedule a new thread
+	}
+	else
+	{
+		alt.printf("Interrupted by the DE2 timer!\n");
+	}
+	// do whatever we need to do
 }
 
 void prototype_os()
