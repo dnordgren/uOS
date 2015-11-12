@@ -15,8 +15,19 @@
 
 // compute the number of alarm ticks relative to system ticks per second
 #define ALARMTICKS(x) ((alt_ticks_per_second()*(x))/10)
+// define the number of threads
 #define NUM_THREADS 12
+// define thread runtime
 #define MAX 10000
+// disable interrupts
+#define DISABLE_INTERRUPTS() { \
+	asm("wrct1 status, zero"); \
+}
+// enable interrupts
+#define ENABLE_INTERRUPTS() { \
+	asm("movi et, 1");        \
+	asm("wrct1 status, et");  \
+}
 
 typedef enum {
 	scheduled,
@@ -81,7 +92,8 @@ void mythread_create(int thread_id, tcb *instance)
 
 void * mythread_scheduler(void *context)
 {
-	// do the necessary setup
+	// TODO do the necessary setup
+
 	if(run_queue_count > 0)
 	{
 		// suspend the current thread and schedule a new thread
@@ -91,7 +103,7 @@ void * mythread_scheduler(void *context)
 		// reprioritize the queue
 		prioritize_queue();
 
-		// schedule the new highest priority thread
+		// TODO schedule the new highest priority thread
 	}
 	else
 	{
@@ -182,6 +194,10 @@ void prototype_os()
 alt_u32 interrupt_handler(void* context)
 {
 	alt_printf("Interrupted by timer!\n");
+	DISABLE_INTERRUPTS()
+	// schedule new thread
+	mythread_scheduler(context);
+	ENABLE_INTERRUPTS()
 	// reset the alarm to interrupt next in 0.5 seconds
 	return ALARMTICKS(5);
 }
