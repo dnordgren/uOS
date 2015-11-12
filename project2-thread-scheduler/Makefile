@@ -142,7 +142,7 @@ ACDS_VERSION := 12.0sp2
 ELF := project2-thread-scheduler.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS := hello_world.c
+C_SRCS := main.c
 CXX_SRCS :=
 ASM_SRCS :=
 

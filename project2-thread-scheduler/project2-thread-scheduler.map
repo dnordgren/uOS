@@ -1,11 +1,11 @@
 Archive member included because of file (symbol)
 
 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
-                              obj/default/hello_world.o (__udivsi3)
+                              obj/default/main.o (__udivsi3)
 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
-                              obj/default/hello_world.o (__mulsi3)
+                              obj/default/main.o (__mulsi3)
 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o)
-                              obj/default/hello_world.o (free)
+                              obj/default/main.o (free)
 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-mallocr.o)
                               c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o) (_malloc_r)
 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-sbrkr.o)
@@ -17,7 +17,7 @@ c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2
 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-int_errno.o)
                               c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-sbrkr.o) (errno)
 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_alarm_start.o)
-                              obj/default/hello_world.o (alt_alarm_start)
+                              obj/default/main.o (alt_alarm_start)
 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_load.o)
                               C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp//obj/HAL/src/crt0.o (alt_load)
 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_main.o)
@@ -25,13 +25,13 @@ C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(a
 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_malloc_lock.o)
                               c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-mallocr.o) (__malloc_lock)
 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_printf.o)
-                              obj/default/hello_world.o (alt_printf)
+                              obj/default/main.o (alt_printf)
 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_putchar.o)
                               C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_printf.o) (alt_putchar)
 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_sbrk.o)
                               c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-sbrkr.o) (sbrk)
 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_tick.o)
-                              obj/default/hello_world.o (_alt_tick_rate)
+                              obj/default/main.o (_alt_tick_rate)
 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_sys_init.o)
                               C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_main.o) (alt_irq_init)
 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_fd.o)
@@ -151,11 +151,11 @@ Allocating common symbols
 Common symbol       size              file
 
 alt_irq             0x100             C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_handler.o)
-run_queue           0x30              obj/default/hello_world.o
+run_queue           0x30              obj/default/main.o
 errno               0x4               c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-int_errno.o)
-alarm               0x18              obj/default/hello_world.o
+alarm               0x18              obj/default/main.o
 _atexit0            0x190             c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-atexit.o)
-run_queue_count     0x4               obj/default/hello_world.o
+run_queue_count     0x4               obj/default/main.o
 
 Memory Configuration
 
@@ -169,7 +169,7 @@ Onchip_memory    0x09000000         0x00002000
 Linker script and memory map
 
 LOAD C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp//obj/HAL/src/crt0.o
-LOAD obj/default/hello_world.o
+LOAD obj/default/main.o
 LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libstdc++.a
 LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libm.a
 LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a
@@ -290,7 +290,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
  *(.text .stub .text.* .gnu.linkonce.t.*)
  .text          0x000001b4       0x3c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp//obj/HAL/src/crt0.o
                 0x000001b4                _start
- .text          0x000001f0      0x4ac obj/default/hello_world.o
+ .text          0x000001f0      0x4ac obj/default/main.o
                 0x000001f0                main
                 0x0000021c                mythread
                 0x000002c4                mythread_create
@@ -505,7 +505,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
                 0x00005494                PROVIDE (__ram_rodata_start, ABSOLUTE (.))
                 0x00005494                . = ALIGN (0x4)
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x00005494       0x84 obj/default/hello_world.o
+ .rodata        0x00005494       0x84 obj/default/main.o
  .rodata.str1.4
                 0x00005518        0x4 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-impure.o)
  .rodata        0x0000551c       0x10 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_main.o)
@@ -524,7 +524,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
  *(.data1)
  *(.data .data.* .gnu.linkonce.d.*)
  .data          0x00005548        0x0 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp//obj/HAL/src/crt0.o
- .data          0x00005548        0x0 obj/default/hello_world.o
+ .data          0x00005548        0x0 obj/default/main.o
  .data          0x00005548        0x0 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
  .data          0x00005548        0x0 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
  .data          0x00005548        0x0 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o)
@@ -635,7 +635,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
                 0x000089d8                PROVIDE (___sbss_start, ABSOLUTE (.))
  *(.dynsbss)
  *(.sbss .sbss.* .gnu.linkonce.sb.*)
- .sbss          0x000089d8        0x4 obj/default/hello_world.o
+ .sbss          0x000089d8        0x4 obj/default/main.o
                 0x000089d8                run_queue_count
  .sbss          0x000089dc        0xc c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-mallocr.o)
                 0x000089dc                __malloc_top_pad
@@ -659,7 +659,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
  *(.dynbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
  .bss           0x00008a04        0x0 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp//obj/HAL/src/crt0.o
- .bss           0x00008a04        0x0 obj/default/hello_world.o
+ .bss           0x00008a04        0x0 obj/default/main.o
  .bss           0x00008a04        0x0 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
  .bss           0x00008a04        0x0 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
  .bss           0x00008a04        0x0 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o)
@@ -735,7 +735,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
  .bss           0x00008a2c        0x0 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_read.o)
  .bss           0x00008a2c        0x0 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_write.o)
  *(COMMON)
- COMMON         0x00008a2c       0x48 obj/default/hello_world.o
+ COMMON         0x00008a2c       0x48 obj/default/main.o
                 0x00008a2c                run_queue
                 0x00008a5c                alarm
  COMMON         0x00008a74      0x100 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_handler.o)
@@ -789,7 +789,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
 
 .comment        0x00000000       0x26
  *(.comment)
- .comment       0x00000000       0x26 obj/default/hello_world.o
+ .comment       0x00000000       0x26 obj/default/main.o
                                  0x27 (size before relaxing)
  .comment       0x00000000       0x27 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
  .comment       0x00000000       0x27 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
@@ -880,7 +880,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
  .debug_aranges
                 0x00000000       0x28 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp//obj/HAL/src/crt0.o
  .debug_aranges
-                0x00000028       0x20 obj/default/hello_world.o
+                0x00000028       0x20 obj/default/main.o
  .debug_aranges
                 0x00000048       0x20 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
  .debug_aranges
@@ -1024,7 +1024,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
                 0x00000000      0xe52
  *(.debug_pubnames)
  .debug_pubnames
-                0x00000000       0xcb obj/default/hello_world.o
+                0x00000000       0xcb obj/default/main.o
  .debug_pubnames
                 0x000000cb       0x48 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
  .debug_pubnames
@@ -1168,88 +1168,88 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
  .debug_pubnames
                 0x00000e36       0x1c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_write.o)
 
-.debug_info     0x00000000    0x1a48b
+.debug_info     0x00000000    0x1a484
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000       0x72 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp//obj/HAL/src/crt0.o
- .debug_info    0x00000072      0x57e obj/default/hello_world.o
- .debug_info    0x000005f0      0x21c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
- .debug_info    0x0000080c       0xf3 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
- .debug_info    0x000008ff      0x96e c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o)
- .debug_info    0x0000126d      0xcd0 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-mallocr.o)
- .debug_info    0x00001f3d      0x962 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-sbrkr.o)
- .debug_info    0x0000289f      0xbc9 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-freer.o)
- .debug_info    0x00003468      0x93d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-impure.o)
- .debug_info    0x00003da5       0x8c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-int_errno.o)
- .debug_info    0x00003e31      0x439 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_alarm_start.o)
- .debug_info    0x0000426a      0x284 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_load.o)
- .debug_info    0x000044ee      0x21c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_main.o)
- .debug_info    0x0000470a      0xc0f C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_malloc_lock.o)
- .debug_info    0x00005319      0x19f C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_printf.o)
- .debug_info    0x000054b8      0xbf3 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_putchar.o)
- .debug_info    0x000060ab      0x2ae C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_sbrk.o)
- .debug_info    0x00006359      0x3f5 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_tick.o)
- .debug_info    0x0000674e      0x717 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_sys_init.o)
- .debug_info    0x00006e65      0x7d0 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_fd.o)
- .debug_info    0x00007635      0x5f8 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_init.o)
- .debug_info    0x00007c2d      0x43a C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_ioctl.o)
- .debug_info    0x00008067      0x53d C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_read.o)
- .debug_info    0x000085a4      0x535 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_write.o)
- .debug_info    0x00008ad9      0x382 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_timer_sc.o)
- .debug_info    0x00008e5b      0x45e C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_close.o)
- .debug_info    0x000092b9      0x153 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dcache_flush_all.o)
- .debug_info    0x0000940c      0x676 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dev.o)
- .debug_info    0x00009a82      0x2ae C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dev_llist_insert.o)
- .debug_info    0x00009d30      0x106 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_do_ctors.o)
- .debug_info    0x00009e36      0x105 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_do_dtors.o)
- .debug_info    0x00009f3b      0x15b C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_errno.o)
- .debug_info    0x0000a096      0x153 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_icache_flush_all.o)
- .debug_info    0x0000a1e9      0x48a C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_iic.o)
- .debug_info    0x0000a673      0x30b C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_iic_isr_register.o)
- .debug_info    0x0000a97e      0x68c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_io_redirect.o)
- .debug_info    0x0000b00a       0x7b C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_entry.o)
- .debug_info    0x0000b085      0x26c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_handler.o)
- .debug_info    0x0000b2f1      0x15e C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_vars.o)
- .debug_info    0x0000b44f      0x51c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_open.o)
- .debug_info    0x0000b96b      0x3e9 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_release_fd.o)
- .debug_info    0x0000bd54      0x150 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_nios2_irq.o)
- .debug_info    0x0000bea4       0x81 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_exception_entry.o)
- .debug_info    0x0000bf25      0x40f C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_find_dev.o)
- .debug_info    0x0000c334      0x416 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_find_file.o)
- .debug_info    0x0000c74a      0x457 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_get_fd.o)
- .debug_info    0x0000cba1      0x181 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-atexit.o)
- .debug_info    0x0000cd22      0x93f c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-exit.o)
- .debug_info    0x0000d661      0x115 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memcmp.o)
- .debug_info    0x0000d776      0x106 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memcpy.o)
- .debug_info    0x0000d87c      0x9c1 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-putc.o)
- .debug_info    0x0000e23d       0xdb c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-strlen.o)
- .debug_info    0x0000e318      0x9ae c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-wbuf.o)
- .debug_info    0x0000ecc6      0x95d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-wsetup.o)
- .debug_info    0x0000f623      0x99c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-__atexit.o)
- .debug_info    0x0000ffbf      0x9e2 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-__call_atexit.o)
- .debug_info    0x000109a1      0x9fe c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fflush.o)
- .debug_info    0x0001139f      0xb72 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-findfp.o)
- .debug_info    0x00011f11      0xaed c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fwalk.o)
- .debug_info    0x000129fe      0xb1a c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-makebuf.o)
- .debug_info    0x00013518      0x113 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memset.o)
- .debug_info    0x0001362b      0xaac c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-stdio.o)
- .debug_info    0x000140d7      0x993 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-writer.o)
- .debug_info    0x00014a6a      0x958 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-closer.o)
- .debug_info    0x000153c2      0x994 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fclose.o)
- .debug_info    0x00015d56      0xafc c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fstatr.o)
- .debug_info    0x00016852      0x958 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-isattyr.o)
- .debug_info    0x000171aa      0x981 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-lseekr.o)
- .debug_info    0x00017b2b      0x98c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-readr.o)
- .debug_info    0x000184b7      0x184 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_exit.o)
- .debug_info    0x0001863b      0x657 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_fstat.o)
- .debug_info    0x00018c92      0x65d C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_isatty.o)
- .debug_info    0x000192ef      0x491 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_lseek.o)
- .debug_info    0x00019780      0x681 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_read.o)
- .debug_info    0x00019e01      0x68a C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_write.o)
+ .debug_info    0x00000072      0x577 obj/default/main.o
+ .debug_info    0x000005e9      0x21c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
+ .debug_info    0x00000805       0xf3 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
+ .debug_info    0x000008f8      0x96e c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o)
+ .debug_info    0x00001266      0xcd0 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-mallocr.o)
+ .debug_info    0x00001f36      0x962 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-sbrkr.o)
+ .debug_info    0x00002898      0xbc9 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-freer.o)
+ .debug_info    0x00003461      0x93d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-impure.o)
+ .debug_info    0x00003d9e       0x8c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-int_errno.o)
+ .debug_info    0x00003e2a      0x439 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_alarm_start.o)
+ .debug_info    0x00004263      0x284 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_load.o)
+ .debug_info    0x000044e7      0x21c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_main.o)
+ .debug_info    0x00004703      0xc0f C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_malloc_lock.o)
+ .debug_info    0x00005312      0x19f C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_printf.o)
+ .debug_info    0x000054b1      0xbf3 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_putchar.o)
+ .debug_info    0x000060a4      0x2ae C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_sbrk.o)
+ .debug_info    0x00006352      0x3f5 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_tick.o)
+ .debug_info    0x00006747      0x717 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_sys_init.o)
+ .debug_info    0x00006e5e      0x7d0 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_fd.o)
+ .debug_info    0x0000762e      0x5f8 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_init.o)
+ .debug_info    0x00007c26      0x43a C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_ioctl.o)
+ .debug_info    0x00008060      0x53d C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_read.o)
+ .debug_info    0x0000859d      0x535 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_write.o)
+ .debug_info    0x00008ad2      0x382 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_timer_sc.o)
+ .debug_info    0x00008e54      0x45e C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_close.o)
+ .debug_info    0x000092b2      0x153 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dcache_flush_all.o)
+ .debug_info    0x00009405      0x676 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dev.o)
+ .debug_info    0x00009a7b      0x2ae C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dev_llist_insert.o)
+ .debug_info    0x00009d29      0x106 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_do_ctors.o)
+ .debug_info    0x00009e2f      0x105 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_do_dtors.o)
+ .debug_info    0x00009f34      0x15b C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_errno.o)
+ .debug_info    0x0000a08f      0x153 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_icache_flush_all.o)
+ .debug_info    0x0000a1e2      0x48a C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_iic.o)
+ .debug_info    0x0000a66c      0x30b C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_iic_isr_register.o)
+ .debug_info    0x0000a977      0x68c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_io_redirect.o)
+ .debug_info    0x0000b003       0x7b C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_entry.o)
+ .debug_info    0x0000b07e      0x26c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_handler.o)
+ .debug_info    0x0000b2ea      0x15e C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_vars.o)
+ .debug_info    0x0000b448      0x51c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_open.o)
+ .debug_info    0x0000b964      0x3e9 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_release_fd.o)
+ .debug_info    0x0000bd4d      0x150 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_nios2_irq.o)
+ .debug_info    0x0000be9d       0x81 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_exception_entry.o)
+ .debug_info    0x0000bf1e      0x40f C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_find_dev.o)
+ .debug_info    0x0000c32d      0x416 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_find_file.o)
+ .debug_info    0x0000c743      0x457 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_get_fd.o)
+ .debug_info    0x0000cb9a      0x181 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-atexit.o)
+ .debug_info    0x0000cd1b      0x93f c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-exit.o)
+ .debug_info    0x0000d65a      0x115 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memcmp.o)
+ .debug_info    0x0000d76f      0x106 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memcpy.o)
+ .debug_info    0x0000d875      0x9c1 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-putc.o)
+ .debug_info    0x0000e236       0xdb c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-strlen.o)
+ .debug_info    0x0000e311      0x9ae c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-wbuf.o)
+ .debug_info    0x0000ecbf      0x95d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-wsetup.o)
+ .debug_info    0x0000f61c      0x99c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-__atexit.o)
+ .debug_info    0x0000ffb8      0x9e2 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-__call_atexit.o)
+ .debug_info    0x0001099a      0x9fe c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fflush.o)
+ .debug_info    0x00011398      0xb72 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-findfp.o)
+ .debug_info    0x00011f0a      0xaed c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fwalk.o)
+ .debug_info    0x000129f7      0xb1a c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-makebuf.o)
+ .debug_info    0x00013511      0x113 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memset.o)
+ .debug_info    0x00013624      0xaac c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-stdio.o)
+ .debug_info    0x000140d0      0x993 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-writer.o)
+ .debug_info    0x00014a63      0x958 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-closer.o)
+ .debug_info    0x000153bb      0x994 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fclose.o)
+ .debug_info    0x00015d4f      0xafc c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fstatr.o)
+ .debug_info    0x0001684b      0x958 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-isattyr.o)
+ .debug_info    0x000171a3      0x981 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-lseekr.o)
+ .debug_info    0x00017b24      0x98c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-readr.o)
+ .debug_info    0x000184b0      0x184 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_exit.o)
+ .debug_info    0x00018634      0x657 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_fstat.o)
+ .debug_info    0x00018c8b      0x65d C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_isatty.o)
+ .debug_info    0x000192e8      0x491 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_lseek.o)
+ .debug_info    0x00019779      0x681 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_read.o)
+ .debug_info    0x00019dfa      0x68a C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_write.o)
 
 .debug_abbrev   0x00000000     0x515d
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0x12 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp//obj/HAL/src/crt0.o
- .debug_abbrev  0x00000012      0x187 obj/default/hello_world.o
+ .debug_abbrev  0x00000012      0x187 obj/default/main.o
  .debug_abbrev  0x00000199       0xe0 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
  .debug_abbrev  0x00000279       0x7b c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
  .debug_abbrev  0x000002f4      0x187 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o)
@@ -1324,87 +1324,87 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
  .debug_abbrev  0x00004f62       0xfb C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_read.o)
  .debug_abbrev  0x0000505d      0x100 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_write.o)
 
-.debug_line     0x00000000     0xc33b
+.debug_line     0x00000000     0xc334
  *(.debug_line)
  .debug_line    0x00000000       0x66 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp//obj/HAL/src/crt0.o
- .debug_line    0x00000066      0x424 obj/default/hello_world.o
- .debug_line    0x0000048a      0x24f c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
- .debug_line    0x000006d9      0x11a c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
- .debug_line    0x000007f3      0x24e c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o)
- .debug_line    0x00000a41      0x80d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-mallocr.o)
- .debug_line    0x0000124e      0x29c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-sbrkr.o)
- .debug_line    0x000014ea      0x5ee c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-freer.o)
- .debug_line    0x00001ad8      0x230 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-impure.o)
- .debug_line    0x00001d08      0x1e2 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-int_errno.o)
- .debug_line    0x00001eea      0x2dc C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_alarm_start.o)
- .debug_line    0x000021c6      0x217 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_load.o)
- .debug_line    0x000023dd      0x2ca C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_main.o)
- .debug_line    0x000026a7      0x20f C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_malloc_lock.o)
- .debug_line    0x000028b6      0x1da C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_printf.o)
- .debug_line    0x00002a90      0x1ca C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_putchar.o)
- .debug_line    0x00002c5a      0x261 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_sbrk.o)
- .debug_line    0x00002ebb      0x2dc C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_tick.o)
- .debug_line    0x00003197      0x2c7 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_sys_init.o)
- .debug_line    0x0000345e      0x217 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_fd.o)
- .debug_line    0x00003675      0x4ab C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_init.o)
- .debug_line    0x00003b20      0x317 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_ioctl.o)
- .debug_line    0x00003e37      0x3f7 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_read.o)
- .debug_line    0x0000422e      0x405 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_write.o)
- .debug_line    0x00004633      0x2b3 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_timer_sc.o)
- .debug_line    0x000048e6      0x299 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_close.o)
- .debug_line    0x00004b7f      0x1b5 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dcache_flush_all.o)
- .debug_line    0x00004d34      0x254 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dev.o)
- .debug_line    0x00004f88      0x25a C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dev_llist_insert.o)
- .debug_line    0x000051e2       0x83 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_do_ctors.o)
- .debug_line    0x00005265       0x83 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_do_dtors.o)
- .debug_line    0x000052e8      0x1aa C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_errno.o)
- .debug_line    0x00005492      0x1b5 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_icache_flush_all.o)
- .debug_line    0x00005647      0x2c8 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_iic.o)
- .debug_line    0x0000590f      0x249 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_iic_isr_register.o)
- .debug_line    0x00005b58      0x2b4 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_io_redirect.o)
- .debug_line    0x00005e0c       0x6b C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_entry.o)
- .debug_line    0x00005e77      0x248 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_handler.o)
- .debug_line    0x000060bf       0x72 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_vars.o)
- .debug_line    0x00006131      0x2ff C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_open.o)
- .debug_line    0x00006430       0xed C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_release_fd.o)
- .debug_line    0x0000651d      0x1c9 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_nios2_irq.o)
- .debug_line    0x000066e6       0xab C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_exception_entry.o)
- .debug_line    0x00006791      0x26b C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_find_dev.o)
- .debug_line    0x000069fc      0x27c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_find_file.o)
- .debug_line    0x00006c78      0x297 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_get_fd.o)
- .debug_line    0x00006f0f      0x203 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-atexit.o)
- .debug_line    0x00007112      0x23b c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-exit.o)
- .debug_line    0x0000734d      0x2a2 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memcmp.o)
- .debug_line    0x000075ef      0x1af c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memcpy.o)
- .debug_line    0x0000779e      0x2c7 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-putc.o)
- .debug_line    0x00007a65      0x270 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-strlen.o)
- .debug_line    0x00007cd5      0x353 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-wbuf.o)
- .debug_line    0x00008028      0x2f3 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-wsetup.o)
- .debug_line    0x0000831b      0x316 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-__atexit.o)
- .debug_line    0x00008631      0x36a c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-__call_atexit.o)
- .debug_line    0x0000899b      0x410 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fflush.o)
- .debug_line    0x00008dab      0x60c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-findfp.o)
- .debug_line    0x000093b7      0x34d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fwalk.o)
- .debug_line    0x00009704      0x3c6 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-makebuf.o)
- .debug_line    0x00009aca      0x304 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memset.o)
- .debug_line    0x00009dce      0x38f c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-stdio.o)
- .debug_line    0x0000a15d      0x29d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-writer.o)
- .debug_line    0x0000a3fa      0x29d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-closer.o)
- .debug_line    0x0000a697      0x2eb c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fclose.o)
- .debug_line    0x0000a982      0x267 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fstatr.o)
- .debug_line    0x0000abe9      0x29e c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-isattyr.o)
- .debug_line    0x0000ae87      0x29d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-lseekr.o)
- .debug_line    0x0000b124      0x29c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-readr.o)
- .debug_line    0x0000b3c0      0x206 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_exit.o)
- .debug_line    0x0000b5c6      0x2a1 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_fstat.o)
- .debug_line    0x0000b867      0x2a2 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_isatty.o)
- .debug_line    0x0000bb09      0x2a1 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_lseek.o)
- .debug_line    0x0000bdaa      0x2c8 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_read.o)
- .debug_line    0x0000c072      0x2c9 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_write.o)
+ .debug_line    0x00000066      0x41d obj/default/main.o
+ .debug_line    0x00000483      0x24f c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
+ .debug_line    0x000006d2      0x11a c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
+ .debug_line    0x000007ec      0x24e c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o)
+ .debug_line    0x00000a3a      0x80d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-mallocr.o)
+ .debug_line    0x00001247      0x29c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-sbrkr.o)
+ .debug_line    0x000014e3      0x5ee c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-freer.o)
+ .debug_line    0x00001ad1      0x230 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-impure.o)
+ .debug_line    0x00001d01      0x1e2 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-int_errno.o)
+ .debug_line    0x00001ee3      0x2dc C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_alarm_start.o)
+ .debug_line    0x000021bf      0x217 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_load.o)
+ .debug_line    0x000023d6      0x2ca C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_main.o)
+ .debug_line    0x000026a0      0x20f C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_malloc_lock.o)
+ .debug_line    0x000028af      0x1da C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_printf.o)
+ .debug_line    0x00002a89      0x1ca C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_putchar.o)
+ .debug_line    0x00002c53      0x261 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_sbrk.o)
+ .debug_line    0x00002eb4      0x2dc C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_tick.o)
+ .debug_line    0x00003190      0x2c7 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_sys_init.o)
+ .debug_line    0x00003457      0x217 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_fd.o)
+ .debug_line    0x0000366e      0x4ab C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_init.o)
+ .debug_line    0x00003b19      0x317 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_ioctl.o)
+ .debug_line    0x00003e30      0x3f7 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_read.o)
+ .debug_line    0x00004227      0x405 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_jtag_uart_write.o)
+ .debug_line    0x0000462c      0x2b3 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_avalon_timer_sc.o)
+ .debug_line    0x000048df      0x299 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_close.o)
+ .debug_line    0x00004b78      0x1b5 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dcache_flush_all.o)
+ .debug_line    0x00004d2d      0x254 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dev.o)
+ .debug_line    0x00004f81      0x25a C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_dev_llist_insert.o)
+ .debug_line    0x000051db       0x83 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_do_ctors.o)
+ .debug_line    0x0000525e       0x83 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_do_dtors.o)
+ .debug_line    0x000052e1      0x1aa C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_errno.o)
+ .debug_line    0x0000548b      0x1b5 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_icache_flush_all.o)
+ .debug_line    0x00005640      0x2c8 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_iic.o)
+ .debug_line    0x00005908      0x249 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_iic_isr_register.o)
+ .debug_line    0x00005b51      0x2b4 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_io_redirect.o)
+ .debug_line    0x00005e05       0x6b C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_entry.o)
+ .debug_line    0x00005e70      0x248 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_handler.o)
+ .debug_line    0x000060b8       0x72 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_irq_vars.o)
+ .debug_line    0x0000612a      0x2ff C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_open.o)
+ .debug_line    0x00006429       0xed C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_release_fd.o)
+ .debug_line    0x00006516      0x1c9 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(altera_nios2_irq.o)
+ .debug_line    0x000066df       0xab C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_exception_entry.o)
+ .debug_line    0x0000678a      0x26b C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_find_dev.o)
+ .debug_line    0x000069f5      0x27c C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_find_file.o)
+ .debug_line    0x00006c71      0x297 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_get_fd.o)
+ .debug_line    0x00006f08      0x203 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-atexit.o)
+ .debug_line    0x0000710b      0x23b c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-exit.o)
+ .debug_line    0x00007346      0x2a2 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memcmp.o)
+ .debug_line    0x000075e8      0x1af c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memcpy.o)
+ .debug_line    0x00007797      0x2c7 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-putc.o)
+ .debug_line    0x00007a5e      0x270 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-strlen.o)
+ .debug_line    0x00007cce      0x353 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-wbuf.o)
+ .debug_line    0x00008021      0x2f3 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-wsetup.o)
+ .debug_line    0x00008314      0x316 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-__atexit.o)
+ .debug_line    0x0000862a      0x36a c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-__call_atexit.o)
+ .debug_line    0x00008994      0x410 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fflush.o)
+ .debug_line    0x00008da4      0x60c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-findfp.o)
+ .debug_line    0x000093b0      0x34d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fwalk.o)
+ .debug_line    0x000096fd      0x3c6 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-makebuf.o)
+ .debug_line    0x00009ac3      0x304 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-memset.o)
+ .debug_line    0x00009dc7      0x38f c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-stdio.o)
+ .debug_line    0x0000a156      0x29d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-writer.o)
+ .debug_line    0x0000a3f3      0x29d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-closer.o)
+ .debug_line    0x0000a690      0x2eb c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fclose.o)
+ .debug_line    0x0000a97b      0x267 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-fstatr.o)
+ .debug_line    0x0000abe2      0x29e c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-isattyr.o)
+ .debug_line    0x0000ae80      0x29d c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-lseekr.o)
+ .debug_line    0x0000b11d      0x29c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-readr.o)
+ .debug_line    0x0000b3b9      0x206 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_exit.o)
+ .debug_line    0x0000b5bf      0x2a1 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_fstat.o)
+ .debug_line    0x0000b860      0x2a2 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_isatty.o)
+ .debug_line    0x0000bb02      0x2a1 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_lseek.o)
+ .debug_line    0x0000bda3      0x2c8 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_read.o)
+ .debug_line    0x0000c06b      0x2c9 C:/Users/Rees/Documents/GitHub/uOS/project2-thread-scheduler_bsp/\libhal_bsp.a(alt_write.o)
 
 .debug_frame    0x00000000     0x116c
  *(.debug_frame)
- .debug_frame   0x00000000       0xf0 obj/default/hello_world.o
+ .debug_frame   0x00000000       0xf0 obj/default/main.o
  .debug_frame   0x000000f0       0x70 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
  .debug_frame   0x00000160       0x20 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
  .debug_frame   0x00000180       0x30 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o)
@@ -1475,7 +1475,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
 
 .debug_str      0x00000000     0x16b5
  *(.debug_str)
- .debug_str     0x00000000       0x24 obj/default/hello_world.o
+ .debug_str     0x00000000       0x24 obj/default/main.o
  .debug_str     0x00000024      0x167 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
                                 0x1b4 (size before relaxing)
  .debug_str     0x0000018b       0x37 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
@@ -1576,7 +1576,7 @@ LOAD c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/
 
 .debug_loc      0x00000000     0x3500
  *(.debug_loc)
- .debug_loc     0x00000000      0x158 obj/default/hello_world.o
+ .debug_loc     0x00000000      0x158 obj/default/main.o
  .debug_loc     0x00000158      0x1d2 c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-divmod.o)
  .debug_loc     0x0000032a       0x4f c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/mno-hw-mul\libgcc.a(lib2-mul.o)
  .debug_loc     0x00000379       0x3c c:/altera/12.0sp2/nios2eds/bin/gnu/h-i686-mingw32/bin/../lib/gcc/nios2-elf/4.1.2/../../../../nios2-elf/lib/mno-hw-mul\libc.a(lib_a-malloc.o)

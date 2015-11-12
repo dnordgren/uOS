@@ -35,45 +35,45 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_pubnames 00000e52  00000000  00000000  000088d0  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_info   0001a48b  00000000  00000000  00009722  2**0
+  9 .debug_info   0001a484  00000000  00000000  00009722  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_abbrev 0000515d  00000000  00000000  00023bad  2**0
+ 10 .debug_abbrev 0000515d  00000000  00000000  00023ba6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_line   0000c33b  00000000  00000000  00028d0a  2**0
+ 11 .debug_line   0000c334  00000000  00000000  00028d03  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_frame  0000116c  00000000  00000000  00035048  2**2
+ 12 .debug_frame  0000116c  00000000  00000000  00035038  2**2
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    000016b5  00000000  00000000  000361b4  2**0
+ 13 .debug_str    000016b5  00000000  00000000  000361a4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_loc    00003500  00000000  00000000  00037869  2**0
+ 14 .debug_loc    00003500  00000000  00000000  00037859  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_alt_sim_info 00000010  00000000  00000000  0003ad6c  2**2
+ 15 .debug_alt_sim_info 00000010  00000000  00000000  0003ad5c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_ranges 000001c0  00000000  00000000  0003ad80  2**3
+ 16 .debug_ranges 000001c0  00000000  00000000  0003ad70  2**3
                   CONTENTS, READONLY, DEBUGGING
- 17 .thread_model 00000003  00000000  00000000  0003d58e  2**0
+ 17 .thread_model 00000003  00000000  00000000  0003d577  2**0
                   CONTENTS, READONLY
- 18 .cpu          00000003  00000000  00000000  0003d591  2**0
+ 18 .cpu          00000003  00000000  00000000  0003d57a  2**0
                   CONTENTS, READONLY
- 19 .simulation_enabled 00000001  00000000  00000000  0003d594  2**0
+ 19 .simulation_enabled 00000001  00000000  00000000  0003d57d  2**0
                   CONTENTS, READONLY
- 20 .sysid_hash   00000004  00000000  00000000  0003d595  2**0
+ 20 .sysid_hash   00000004  00000000  00000000  0003d57e  2**0
                   CONTENTS, READONLY
- 21 .sysid_base   00000004  00000000  00000000  0003d599  2**0
+ 21 .sysid_base   00000004  00000000  00000000  0003d582  2**0
                   CONTENTS, READONLY
- 22 .sysid_time   00000004  00000000  00000000  0003d59d  2**0
+ 22 .sysid_time   00000004  00000000  00000000  0003d586  2**0
                   CONTENTS, READONLY
- 23 .stderr_dev   00000009  00000000  00000000  0003d5a1  2**0
+ 23 .stderr_dev   00000009  00000000  00000000  0003d58a  2**0
                   CONTENTS, READONLY
- 24 .stdin_dev    00000009  00000000  00000000  0003d5aa  2**0
+ 24 .stdin_dev    00000009  00000000  00000000  0003d593  2**0
                   CONTENTS, READONLY
- 25 .stdout_dev   00000009  00000000  00000000  0003d5b3  2**0
+ 25 .stdout_dev   00000009  00000000  00000000  0003d59c  2**0
                   CONTENTS, READONLY
- 26 .sopc_system_name 0000000b  00000000  00000000  0003d5bc  2**0
+ 26 .sopc_system_name 0000000b  00000000  00000000  0003d5a5  2**0
                   CONTENTS, READONLY
- 27 .quartus_project_dir 0000002f  00000000  00000000  0003d5c7  2**0
+ 27 .quartus_project_dir 0000002f  00000000  00000000  0003d5b0  2**0
                   CONTENTS, READONLY
- 28 .sopcinfo     0006a1c7  00000000  00000000  0003d5f6  2**0
+ 28 .sopcinfo     0006a1c7  00000000  00000000  0003d5df  2**0
                   CONTENTS, READONLY
 SYMBOL TABLE:
 00000000 l    d  .entry	00000000 .entry
@@ -95,7 +95,7 @@ SYMBOL TABLE:
 00000000 l    d  .debug_ranges	00000000 .debug_ranges
 000001ec l       .text	00000000 alt_after_alt_main
 00000000 l    df *ABS*	00000000 alt_irq_handler.c
-00000000 l    df *ABS*	00000000 hello_world.c
+00000000 l    df *ABS*	00000000 main.c
 00000000 l    df *ABS*	00000000 lib2-divmod.c
 0000069c l     F .text	0000007c udivmodsi4
 00000000 l    df *ABS*	00000000 lib2-mul.c
