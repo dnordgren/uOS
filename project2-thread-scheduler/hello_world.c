@@ -17,6 +17,20 @@
 #define ALARMTICKS(x) ((alt_ticks_per_second()*(x))/10)
 #define NUMTHREADS 12
 
+struct tcb {
+	int thread_id;
+	int run_count;
+	thread_status status;
+	void* context;
+};
+
+enum thread_status
+{
+	scheduled,
+	running,
+	finished
+};
+
 // entry point to prototype operating system
 void prototype_os();
 
