@@ -15,7 +15,7 @@
 
 // compute the number of alarm ticks relative to system ticks per second
 #define ALARMTICKS(x) ((alt_ticks_per_second()*(x))/10)
-#define NUMTHREADS 12
+#define NUM_THREADS 12
 
 struct tcb {
 	int thread_id;
@@ -36,6 +36,8 @@ void prototype_os();
 
 void mythread(int thread_id);
 
+tcb * mythread_create(int thread_id);
+
 void * mythread_scheduler(void *context);
 
 // callback function for alarm interrupt
@@ -43,6 +45,8 @@ alt_u32 interrupt_handler(void* context);
 
 // the alarm that will regularly interrupt program execution
 alt_alarm alarm;
+
+int run_queue[NUMTHREADS];
 
 int main()
 {
@@ -62,6 +66,18 @@ void mythread(int thread_id)
 	}
 }
 
+tcb * mythread_create(int thread_id)
+{
+	// TODO: Free bird!
+	tcb *thread = (tcb *)malloc(sizeof(tcb));
+	thread->thread_id = thread_id;
+	// Add thread to run_queue
+	run_queue[thread_id] = thread;
+	// thread has been added to queue; set its status to scheduled
+	thread->status = thread_status.scheduled;
+	return &thread;
+}
+
 void prototype_os()
 {
 	int i;
@@ -69,12 +85,12 @@ void prototype_os()
 	alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
 
 	// do all the necessary setup
-	for (i = 0; i < NUMTHREADS; i++)
+	for (i = 0; i < NUM_THREADS; i++)
 	{
 		// create the threads
 	}
 
-	for (i = 0; i < NUMTHREADS; i++)
+	for (i = 0; i < NUM_THREADS; i++)
 	{
 		// join the threads
 	}
