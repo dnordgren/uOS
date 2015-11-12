@@ -1,24 +1,56 @@
 /*
- * "Hello World" example.
+ * Project 2, Thread Scheduler
+ * main.c
+ * @author Rees Klintworth
+ * @author Derek Nordgren
  *
- * This example prints 'Hello from Nios II' to the STDOUT stream. It runs on
- * the Nios II 'standard', 'full_featured', 'fast', and 'low_cost' example
- * designs. It runs with or without the MicroC/OS-II RTOS and requires a STDOUT
- * device in your system's hardware.
- * The memory footprint of this hosted application is ~69 kbytes by default
- * using the standard reference design.
- *
- * For a reduced footprint version of this template, and an explanation of how
- * to reduce the memory footprint for a given application, see the
- * "small_hello_world" template.
- *
+ * This program schedules and interrupts a series of threads before returning
+ * to execute the main thread.
  */
 
-#include <stdio.h>
+#include <stdlib.h>
+#include "sys/alt_stdio.h"
+#include "sys/alt_alarm.h"
+#include "alt_types.h"
+
+// compute the number of alarm ticks relative to system ticks per second
+#define ALARMTICKS(x) ((alt_ticks_per_second()*(x))/10)
+
+// entry point to prototype operating system
+void prototype_os();
+
+// callback function for alarm interrupt
+alt_u32 interrupt_handler(void* context);
+
+// the alarm that will regularly interrupt program execution
+alt_alarm alarm;
 
 int main()
 {
-  printf("Hello from Nios II!\n");
+	// begin execution of the operating system
+	prototype_os();
+	return 0;
+}
 
-  return 0;
+void prototype_os()
+{
+	// initialize the alarm to interrupt after 1 second and set the alarm's callback function
+	alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
+
+	// loop endlessly
+	while(1)
+	{
+		alt_printf("Hello from uOS!\n");
+
+		// loop; will be interrupted
+		int j;
+		for (j = 0; j < 10000; j++);
+	}
+}
+
+alt_u32 interrupt_handler(void* context)
+{
+	alt_printf("Interrupted by timer!\n");
+	// reset the alarm to interrupt next in 0.5 seconds
+	return ALARMTICKS(5);
 }
