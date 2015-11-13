@@ -9,6 +9,8 @@
  */
 
 #include <stdlib.h>
+#include <setjmp.h>
+#include <malloc.h>
 #include "sys/alt_stdio.h"
 #include "sys/alt_alarm.h"
 #include "alt_types.h"
@@ -19,6 +21,7 @@
 #define NUM_THREADS 12
 // define thread runtime
 #define MAX 10000
+#define STACK_SIZE 4096
 // disable interrupts
 #define DISABLE_INTERRUPTS() { \
 	asm("wrct1 status, zero"); \
@@ -37,15 +40,19 @@ typedef enum {
 
 typedef struct tcb {
 	int thread_id;
-	int run_count;
+	int scheduled_count;
 	thread_status status;
-	void* context;
+	void *stack_pointer;
+	void (*function)(void *arg);
+	void *arg;
+	void *frame_pointer;
+	jmp_buf buf;
 } tcb;
 
 // entry point to prototype operating system
 void prototype_os();
 void mythread(int thread_id);
-void mythread_create(int thread_id, tcb *instance);
+void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg);
 void * mythread_scheduler(void *context);
 // callback function for alarm interrupt
 alt_u32 interrupt_handler(void* context);
@@ -53,12 +60,20 @@ alt_u32 interrupt_handler(void* context);
 void prune_queue();
 // helper function for prioritizing threads in run queue
 void prioritize_queue();
+// helper function used to deallocate tcb for a thread instance
+void destroy_thread(tcb *thread);
 
 // the alarm that will regularly interrupt program execution
 alt_alarm alarm;
 
+// the thread to return to once execution of the current thread has finished
+tcb *ret;
+
+int global_flag = 0;
+
 tcb *run_queue[NUM_THREADS];
 int run_queue_count;
+int current_thread_id;
 
 int main()
 {
@@ -78,16 +93,43 @@ void mythread(int thread_id)
 	}
 }
 
-void mythread_create(int thread_id, tcb *instance)
+void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg)
 {
-	tcb *thread = (tcb *)malloc(sizeof(tcb));
-	thread->thread_id = thread_id;
+	// allocate memory for the thread's workspace
+	tcb *t = (tcb *)malloc(sizeof(tcb));
+	t->thread_id = thread_id;
+	// allocate memory for the thread's stack
+	void *stack = memalign(8, STACK_SIZE);
+	t->frame_pointer = stack;
+	// set stack pointer
+	t->stack_pointer = stack + STACK_SIZE;
+	// set the thread's function to run
+	t->function = f;
+
 	// add thread to run_queue
-	run_queue[thread_id] = thread;
+	run_queue[thread_id] = t;
 	run_queue_count++;
 	// thread has been added to queue; set its status to scheduled
-	thread->status = scheduled;
-	instance = thread;
+	t->status = scheduled;
+	thread = t;
+}
+
+void mythread_join()
+{
+	// suspend main thread while other threads are running
+	// once other threads have died, resume main
+	// save a copy of the main thread to return to
+	mythread_create(-1, ret, NULL, NULL);
+}
+
+void thread_yield()
+{
+	// save the context of the currently-running thread
+	if(!setjmp(run_queue[current_thread_id]->buf))
+	{
+		// dispatch the next thread in the queue
+		// TODO dispatch next thread
+	}
 }
 
 void * mythread_scheduler(void *context)
@@ -112,6 +154,13 @@ void * mythread_scheduler(void *context)
 	// do whatever we need to do
 }
 
+void destroy_thread(tcb *thread)
+{
+	alt_printf("thread %i destroyed; was scheduled %i times\n", thread->thread_id, thread->scheduled_count);
+	free(thread->frame_pointer);
+	free(thread);
+}
+
 void prune_queue()
 {
 	int i, j;
@@ -125,8 +174,7 @@ void prune_queue()
 			// remove the completed thread from the queue
 			run_queue[i] = NULL;
 			run_queue_count--;
-			// destroy the thread
-			free(thread);
+			destroy_thread(thread);
 			// shift all remaining threads in the queue up
 			for(j = i; j < NUM_THREADS-1; j++)
 			{
@@ -173,7 +221,14 @@ void prototype_os()
 	// do all the necessary setup
 	for (i = 0; i < NUM_THREADS; i++)
 	{
-		// create the threads
+		// create new thread; set its function to execute
+		tcb *new_thread;
+		mythread_create(i, new_thread, mythread, &i);
+	}
+
+	if(!setjmp(ret->buf))
+	{
+		// dispatch the first thread in the run queue
 	}
 
 	for (i = 0; i < NUM_THREADS; i++)
@@ -194,10 +249,8 @@ void prototype_os()
 alt_u32 interrupt_handler(void* context)
 {
 	alt_printf("Interrupted by timer!\n");
-	DISABLE_INTERRUPTS()
 	// schedule new thread
-	mythread_scheduler(context);
-	ENABLE_INTERRUPTS()
+	global_flag = 1;
 	// reset the alarm to interrupt next in 0.5 seconds
 	return ALARMTICKS(5);
 }
