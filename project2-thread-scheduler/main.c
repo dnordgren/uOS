@@ -38,12 +38,17 @@ typedef enum {
 	finished
 } thread_status;
 
+typedef struct stack_context {
+	int *sp;
+	int *fp;
+} stack_context;
+
 typedef struct tcb {
 	int thread_id;
 	int scheduled_count;
 	thread_status status;
-	void *stack_pointer;
-	void *frame_pointer;
+	int *sp;
+	int *fp;
 	void (*function)(void *arg);
 	void *arg;
 	jmp_buf buf;
@@ -53,7 +58,7 @@ typedef struct tcb {
 void prototype_os();
 void mythread(int thread_id);
 void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg);
-void * mythread_scheduler(void *context);
+void * thread_scheduler(void *sp, void *fp);
 // callback function for alarm interrupt
 alt_u32 interrupt_handler(void* context);
 // helper function for pruning run queue of completed threads
@@ -73,7 +78,7 @@ int global_flag = 0;
 
 tcb *run_queue[NUM_THREADS];
 int run_queue_count;
-int current_thread_id;
+tcb* current_thread;
 
 int main()
 {
@@ -105,9 +110,9 @@ void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg)
 	// allocate memory for the thread's stack
 	// TODO malloc stack space all at once to assure contiguous memory
 	void *stack = memalign(8, STACK_SIZE);
-	t->frame_pointer = stack;
+	t->fp = stack;
 	// set stack pointer
-	t->stack_pointer = stack + STACK_SIZE;
+	t->sp = stack + STACK_SIZE;
 	// set the thread's function to run
 	t->function = f;
 
@@ -127,21 +132,13 @@ void mythread_join()
 	mythread_create(-1, ret, NULL, NULL);
 }
 
-void thread_yield()
+void * thread_scheduler(void *sp, void *fp)
 {
-	// save the context of the currently-running thread
-	if(!setjmp(run_queue[current_thread_id]->buf))
-	{
-		// dispatch the next thread in the queue
-		// TODO dispatch next thread
-	}
-}
-
-void * mythread_scheduler(void *context)
-{
-	// cast context to struct with fp, sp
-	// read fp, sp from context
-	// save fp, sp to the current thread's tcb
+	int *stack_pointer = (int *)sp;
+	int *frame_pointer = (int *)fp;
+	// save the yielded thread's progress via sp, fp
+	current_thread->sp = stack_pointer;
+	current_thread->fp = frame_pointer;
 
 	if(run_queue_count > 0)
 	{
@@ -150,19 +147,25 @@ void * mythread_scheduler(void *context)
 		// reprioritize the queue
 		prioritize_queue();
 
-		// TODO schedule the new highest priority thread
+		// set the new thread to run as the current thread
+		current_thread = run_queue[0];
+		// send the next thread's stack context back to assembly to be run
+		stack_context nsc;
+		nsc.sp = current_thread->sp;
+		nsc.fp = current_thread->fp;
+		// TODO how to handle returning local variable? use r6, r7?
+		return &nsc;
 	}
 	else
 	{
 		alt_printf("Interrupted by the DE2 timer!\n");
+		return NULL;
 	}
-	// return struct (to assembly) that is next thread's sp, fp
 }
 
 void destroy_thread(tcb *thread)
 {
 	alt_printf("thread %i destroyed; was scheduled %i times\n", thread->thread_id, thread->scheduled_count);
-	free(thread->frame_pointer);
 	free(thread);
 }
 
