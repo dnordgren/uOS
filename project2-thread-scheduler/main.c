@@ -51,7 +51,6 @@ typedef struct tcb {
 	int *fp;
 	void (*function)(void *arg);
 	void *arg;
-	jmp_buf buf;
 } tcb;
 
 // entry point to prototype operating system
@@ -67,6 +66,8 @@ void prune_queue();
 void prioritize_queue();
 // helper function used to deallocate tcb for a thread instance
 void destroy_thread(tcb *thread);
+// helper function used to mark thread as finished
+void finish_thread();
 
 // the alarm that will regularly interrupt program execution
 alt_alarm alarm;
@@ -104,17 +105,16 @@ void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg)
 	// alt_exception_entry tells us the location of ea 72(sp)
 	// which is sp + 72/4
 
-	// allocate memory for the thread's workspace
-	tcb *t = (tcb *)malloc(sizeof(tcb));
+	// allocate memory for the thread's workspace and stack
+	tcb *t = (tcb *)malloc(sizeof(tcb) + STACK_SIZE);
 	t->thread_id = thread_id;
-	// allocate memory for the thread's stack
-	// TODO malloc stack space all at once to assure contiguous memory
-	void *stack = memalign(8, STACK_SIZE);
-	t->fp = stack;
 	// set stack pointer
-	t->sp = stack + STACK_SIZE;
+	t->sp = t + sizeof(tcb);
+	// set frame pointer
+	t->fp = t->sp + STACK_SIZE;
 	// set the thread's function to run
 	t->function = f;
+	t->sp + 18 = finish_thread;
 
 	// add thread to run_queue
 	run_queue[thread_id] = t;
@@ -124,6 +124,7 @@ void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg)
 	thread = t;
 }
 
+// TODO
 void mythread_join()
 {
 	// suspend main thread while other threads are running
@@ -134,6 +135,7 @@ void mythread_join()
 
 void thread_scheduler(void *sp, void *fp)
 {
+	DISABLE_INTERRUPTS()
 	// save the yielded thread's progress via sp, fp
 	current_thread->sp = (int *)sp;
 	current_thread->fp = (int *)fp;
@@ -156,12 +158,18 @@ void thread_scheduler(void *sp, void *fp)
 	{
 		alt_printf("Interrupted by the DE2 timer!\n");
 	}
+	ENABLE_INTERRUPTS()
 }
 
 void destroy_thread(tcb *thread)
 {
 	alt_printf("thread %i destroyed; was scheduled %i times\n", thread->thread_id, thread->scheduled_count);
 	free(thread);
+}
+
+void finish_thread()
+{
+	current_thread->status = finished;
 }
 
 void prune_queue()
@@ -257,7 +265,7 @@ alt_u32 interrupt_handler(void* context)
 		global_flag = 1;
 	}
 	// reset the alarm to interrupt next in 0.5 seconds
-	return ALARMTICKS(5);
+	return ALARMTICKS(50);
 }
 
 void reset_global_flag()
