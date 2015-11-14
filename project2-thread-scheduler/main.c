@@ -58,7 +58,7 @@ typedef struct tcb {
 void prototype_os();
 void mythread(int thread_id);
 void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg);
-void * thread_scheduler(void *sp, void *fp);
+void thread_scheduler(void *sp, void *fp);
 // callback function for alarm interrupt
 alt_u32 interrupt_handler(void* context);
 // helper function for pruning run queue of completed threads
@@ -132,13 +132,11 @@ void mythread_join()
 	mythread_create(-1, ret, NULL, NULL);
 }
 
-void * thread_scheduler(void *sp, void *fp)
+void thread_scheduler(void *sp, void *fp)
 {
-	int *stack_pointer = (int *)sp;
-	int *frame_pointer = (int *)fp;
 	// save the yielded thread's progress via sp, fp
-	current_thread->sp = stack_pointer;
-	current_thread->fp = frame_pointer;
+	current_thread->sp = (int *)sp;
+	current_thread->fp = (int *)fp;
 
 	if(run_queue_count > 0)
 	{
@@ -149,17 +147,14 @@ void * thread_scheduler(void *sp, void *fp)
 
 		// set the new thread to run as the current thread
 		current_thread = run_queue[0];
+
 		// send the next thread's stack context back to assembly to be run
-		stack_context nsc;
-		nsc.sp = current_thread->sp;
-		nsc.fp = current_thread->fp;
-		// TODO how to handle returning local variable? use r6, r7?
-		return &nsc;
+		sp = current_thread->sp;
+		fp = current_thread->fp;
 	}
 	else
 	{
 		alt_printf("Interrupted by the DE2 timer!\n");
-		return NULL;
 	}
 }
 
@@ -257,7 +252,10 @@ alt_u32 interrupt_handler(void* context)
 {
 	alt_printf("Interrupted by timer!\n");
 	// schedule new thread
-	global_flag = 1;
+	if (run_queue_count > 0) // TODO do we have to do this?
+	{
+		global_flag = 1;
+	}
 	// reset the alarm to interrupt next in 0.5 seconds
 	return ALARMTICKS(5);
 }
