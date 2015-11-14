@@ -43,9 +43,9 @@ typedef struct tcb {
 	int scheduled_count;
 	thread_status status;
 	void *stack_pointer;
+	void *frame_pointer;
 	void (*function)(void *arg);
 	void *arg;
-	void *frame_pointer;
 	jmp_buf buf;
 } tcb;
 
@@ -95,10 +95,15 @@ void mythread(int thread_id)
 
 void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg)
 {
+	// TODO set ea to be the function we want to return
+	// alt_exception_entry tells us the location of ea 72(sp)
+	// which is sp + 72/4
+
 	// allocate memory for the thread's workspace
 	tcb *t = (tcb *)malloc(sizeof(tcb));
 	t->thread_id = thread_id;
 	// allocate memory for the thread's stack
+	// TODO malloc stack space all at once to assure contiguous memory
 	void *stack = memalign(8, STACK_SIZE);
 	t->frame_pointer = stack;
 	// set stack pointer
@@ -134,12 +139,12 @@ void thread_yield()
 
 void * mythread_scheduler(void *context)
 {
-	// TODO do the necessary setup
+	// cast context to struct with fp, sp
+	// read fp, sp from context
+	// save fp, sp to the current thread's tcb
 
 	if(run_queue_count > 0)
 	{
-		// suspend the current thread and schedule a new thread
-
 		// remove completed threads from the queue
 		prune_queue();
 		// reprioritize the queue
@@ -151,7 +156,7 @@ void * mythread_scheduler(void *context)
 	{
 		alt_printf("Interrupted by the DE2 timer!\n");
 	}
-	// do whatever we need to do
+	// return struct (to assembly) that is next thread's sp, fp
 }
 
 void destroy_thread(tcb *thread)
@@ -214,11 +219,10 @@ void prioritize_queue()
 
 void prototype_os()
 {
-	int i;
 	// initialize the alarm to interrupt after 1 second and set the alarm's callback function
 	alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
 
-	// do all the necessary setup
+	int i;
 	for (i = 0; i < NUM_THREADS; i++)
 	{
 		// create new thread; set its function to execute
@@ -253,4 +257,14 @@ alt_u32 interrupt_handler(void* context)
 	global_flag = 1;
 	// reset the alarm to interrupt next in 0.5 seconds
 	return ALARMTICKS(5);
+}
+
+void reset_global_flag()
+{
+	global_flag = 0;
+}
+
+int get_global_flag()
+{
+	return global_flag;
 }

@@ -144,7 +144,7 @@ ELF := project2-thread-scheduler.elf
 # Paths to C, C++, and assembly source files.
 C_SRCS := main.c
 CXX_SRCS :=
-ASM_SRCS :=
+ASM_SRCS := my_scheduler.S
 
 
 # Path to root of object file tree.
