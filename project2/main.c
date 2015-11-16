@@ -292,11 +292,11 @@ int get_global_flag()
 
 void disable_interrupts()
 {
-	asm("wrct1 status, zero");
+	asm("wrctl status, zero");
 }
 
 void enable_interrupts()
 {
 	asm("movi et, 1");
-	asm("wrct1 status, et");
+	asm("wrctl status, et");
 }
