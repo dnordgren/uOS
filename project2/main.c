@@ -109,7 +109,7 @@ void mythread(int thread_id)
 	n = (thread_id % 2 == 0) ? 10 : 15;
 	for (i = 0; i < n; i++)
 	{
-		alt_printf("This is message %d of thread # %d.\n", i, thread_id);
+		alt_printf("This is message %x of thread # %x.\n", i, thread_id);
 		for (j = 0; j < MAX; j++);
 	}
 }
@@ -166,7 +166,7 @@ stack_context thread_scheduler(void *sp, void *fp)
 		// update next-to-run thread's number of times scheduled count
 		current_thread->scheduled_count++;
 
-		alt_printf("next thread to run: %d\n", current_thread->thread_id);
+		alt_printf("next thread to run: %x\n", current_thread->thread_id);
 	}
 	else
 	{
@@ -183,7 +183,7 @@ stack_context thread_scheduler(void *sp, void *fp)
 
 void destroy_thread(tcb *thread)
 {
-	alt_printf("thread %d destroyed; was scheduled %d times\n", thread->thread_id, thread->scheduled_count);
+	alt_printf("thread %x destroyed; was scheduled %x times\n", thread->thread_id, thread->scheduled_count);
 	free(thread);
 }
 

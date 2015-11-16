@@ -814,7 +814,7 @@ void mythread(int thread_id)
      280:	e03ffd15 	stw	zero,-12(fp)
      284:	00001006 	br	2c8 <mythread+0x88>
 	{
-		alt_printf("This is message %d of thread # %d.\n", i, thread_id);
+		alt_printf("This is message %x of thread # %x.\n", i, thread_id);
      288:	01000034 	movhi	r4,0
      28c:	2115dc04 	addi	r4,r4,22384
      290:	e17ffd17 	ldw	r5,-12(fp)
@@ -842,7 +842,7 @@ void mythread(int thread_id)
      2cc:	e0bffb17 	ldw	r2,-20(fp)
      2d0:	18bfed16 	blt	r3,r2,288 <mythread+0x48>
 	{
-		alt_printf("This is message %d of thread # %d.\n", i, thread_id);
+		alt_printf("This is message %x of thread # %x.\n", i, thread_id);
 		for (j = 0; j < MAX; j++);
 	}
 }
@@ -1018,7 +1018,7 @@ stack_context thread_scheduler(void *sp, void *fp)
      490:	10800044 	addi	r2,r2,1
      494:	18800115 	stw	r2,4(r3)
 
-		alt_printf("next thread to run: %d\n", current_thread->thread_id);
+		alt_printf("next thread to run: %x\n", current_thread->thread_id);
      498:	d0a6a117 	ldw	r2,-25980(gp)
      49c:	11400017 	ldw	r5,0(r2)
      4a0:	01000034 	movhi	r4,0
@@ -1068,7 +1068,7 @@ void destroy_thread(tcb *thread)
      508:	df000115 	stw	fp,4(sp)
      50c:	df000104 	addi	fp,sp,4
      510:	e13fff15 	stw	r4,-4(fp)
-	alt_printf("thread %d destroyed; was scheduled %d times\n", thread->thread_id, thread->scheduled_count);
+	alt_printf("thread %x destroyed; was scheduled %x times\n", thread->thread_id, thread->scheduled_count);
      514:	e0bfff17 	ldw	r2,-4(fp)
      518:	11400017 	ldw	r5,0(r2)
      51c:	e0bfff17 	ldw	r2,-4(fp)
