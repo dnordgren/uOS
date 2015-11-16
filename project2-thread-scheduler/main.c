@@ -9,7 +9,6 @@
  */
 
 #include <stdlib.h>
-#include <setjmp.h>
 #include <malloc.h>
 #include "sys/alt_stdio.h"
 #include "sys/alt_alarm.h"
@@ -101,10 +100,6 @@ void mythread(int thread_id)
 
 void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg)
 {
-	// TODO set ea to be the function we want to return
-	// alt_exception_entry tells us the location of ea 72(sp)
-	// which is sp + 72/4
-
 	// allocate memory for the thread's workspace and stack
 	tcb *t = (tcb *)malloc(sizeof(tcb) + STACK_SIZE);
 	t->thread_id = thread_id;
@@ -114,7 +109,7 @@ void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg)
 	t->fp = t->sp + STACK_SIZE;
 	// set the thread's function to run
 	t->function = f;
-	t->sp + 18 = finish_thread;
+	*(t->sp + 18) = finish_thread;
 
 	// add thread to run_queue
 	run_queue[thread_id] = t;
@@ -135,7 +130,7 @@ void mythread_join()
 
 void thread_scheduler(void *sp, void *fp)
 {
-	DISABLE_INTERRUPTS()
+	DISABLE_INTERRUPTS() // TODO why does this not work?
 	// save the yielded thread's progress via sp, fp
 	current_thread->sp = (int *)sp;
 	current_thread->fp = (int *)fp;
@@ -147,12 +142,16 @@ void thread_scheduler(void *sp, void *fp)
 		// reprioritize the queue
 		prioritize_queue();
 
-		// set the new thread to run as the current thread
+		// set the next-to-run to run as the current thread
 		current_thread = run_queue[0];
+		// update next-to-run thread's number of times scheduled count
+		current_thread->scheduled_count++;
 
-		// send the next thread's stack context back to assembly to be run
+		// send the next-to-run thread's stack context back to assembly to be run
 		sp = current_thread->sp;
 		fp = current_thread->fp;
+
+		// TODO start function of new thread
 	}
 	else
 	{
@@ -236,11 +235,6 @@ void prototype_os()
 		mythread_create(i, new_thread, mythread, &i);
 	}
 
-	if(!setjmp(ret->buf))
-	{
-		// dispatch the first thread in the run queue
-	}
-
 	for (i = 0; i < NUM_THREADS; i++)
 	{
 		// join the threads
@@ -277,3 +271,4 @@ int get_global_flag()
 {
 	return global_flag;
 }
+
