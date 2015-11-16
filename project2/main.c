@@ -20,7 +20,7 @@
 #define NUM_THREADS 12
 // define thread runtime
 #define MAX 10000
-#define STACK_SIZE 4096
+#define STACK_SIZE 1000
 
 typedef enum {
 	scheduled,
@@ -60,7 +60,7 @@ void thread_join(tcb *thread);
 /**
  * yield the currently running thread; dispatch a new thread
  */
-void thread_scheduler(void *sp, void *fp);
+stack_context thread_scheduler(void *sp, void *fp);
 /**
  * callback function for alarm interrupt
  */
@@ -97,7 +97,7 @@ tcb* current_thread;
 
 int main()
 {
-	disable_interrupts();
+	//disable_interrupts();
 	// begin execution of the operating system
 	prototype_os();
 	return 0;
@@ -121,9 +121,9 @@ void thread_create(int thread_id, tcb *thread)
 	t->thread_id = thread_id;
 	t->scheduled_count = 0;
 	// set stack pointer
-	t->fp = t + sizeof(tcb);
+	t->fp = t + sizeof(tcb) + STACK_SIZE;
 	// set frame pointer
-	t->sp = t->fp + STACK_SIZE;
+	t->sp = t->fp - 19;
 	// set the thread's function to run
 	*(t->sp + 18) = mythread; // set ea (function to run)
 	*(t->sp + 5) = thread_id; // set r4 (argument for mythread)
@@ -146,11 +146,10 @@ void thread_join(tcb *thread)
 	}
 }
 
-void thread_scheduler(void *sp, void *fp)
+stack_context thread_scheduler(void *sp, void *fp)
 {
 	alt_printf("scheduling threads...\n");
 
-	disable_interrupts();
 	// save the yielded thread's progress via sp, fp
 	current_thread->sp = (int *)sp;
 	current_thread->fp = (int *)fp;
@@ -168,17 +167,18 @@ void thread_scheduler(void *sp, void *fp)
 		current_thread->scheduled_count++;
 
 		alt_printf("next thread to run: %d\n", current_thread->thread_id);
-		current_thread->status = finished;
-
-		// send the next-to-run thread's stack context back to assembly to be run
-		sp = current_thread->sp;
-		fp = current_thread->fp;
 	}
 	else
 	{
 		alt_printf("Interrupted by the DE2 timer!\n");
 	}
-	enable_interrupts();
+	// send the next-to-run thread's stack context back to assembly to be run
+	stack_context context;
+	context.sp = current_thread->sp;
+	context.fp = current_thread->fp;
+//	*(context.sp + 17) = 1;
+//	*(context.sp + 18) = mythread;
+	return context;
 }
 
 void destroy_thread(tcb *thread)
@@ -260,7 +260,7 @@ void prototype_os()
 	
 	// initialize the alarm to interrupt after 1 second and set the alarm's callback function
 	alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
-	enable_interrupts();
+	//enable_interrupts();
 
 	// join all threads on main (main paused until all threads finish)
 	for (i = 0; i < NUM_THREADS; i++)
@@ -287,7 +287,7 @@ alt_u32 interrupt_handler(void* context)
 		global_flag = 1;
 	}
 	// reset the alarm to interrupt next in 0.5 seconds
-	return ALARMTICKS(50);
+	return ALARMTICKS(5);
 }
 
 void reset_global_flag()
