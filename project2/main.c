@@ -43,29 +43,56 @@ typedef struct tcb {
 	void *arg;
 } tcb;
 
-// entry point to prototype operating system
+/**
+ * entry point to prototype operating system
+ */
 void prototype_os();
+/**
+ * body of work each thread is to complete
+ */
 void mythread(int thread_id);
-void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg);
+/**
+ * create new thread
+ */
+void thread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg);
+/**
+ * cause the main thread to wait on the provided thread
+ */
+void thread_join(tcb *thread);
+/**
+ * yield the currently running thread; dispatch a new thread
+ */
 void thread_scheduler(void *sp, void *fp);
-// callback function for alarm interrupt
+/**
+ * callback function for alarm interrupt
+ */
 alt_u32 interrupt_handler(void* context);
-// helper function for pruning run queue of completed threads
+/**
+ * remove completed threads from run queuue
+ */
 void prune_queue();
-// helper function for prioritizing threads in run queue
+/**
+ * prioritize threads in run queue
+ */
 void prioritize_queue();
-// helper function used to deallocate tcb for a thread instance
+/** deallocate thread workspace
+ *
+ */
 void destroy_thread(tcb *thread);
-// helper function used to mark thread as finished
+/**
+ * mark thread as finished ("callback" for thread completion)
+ */
 void finish_thread();
 
-// the alarm that will regularly interrupt program execution
+/* the alarm that will regularly interrupt program execution */
 alt_alarm alarm;
-
+/* used to determine whether interrupt handling should be modified to switch threads */
 int global_flag = 0;
-
+/* queue of threads to run */
 tcb *run_queue[NUM_THREADS];
+/* count of threads remaining in queue */
 int run_queue_count;
+/* the currently running thread */
 tcb* current_thread;
 
 int main()
@@ -86,7 +113,7 @@ void mythread(int thread_id)
 	}
 }
 
-void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg)
+void thread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg)
 {
 	// allocate memory for the thread's workspace and stack
 	tcb *t = (tcb *)malloc(sizeof(tcb) + STACK_SIZE);
@@ -108,7 +135,7 @@ void mythread_create(int thread_id, tcb *thread, void(*f)(void *arg), void *arg)
 }
 
 // TODO
-void mythread_join(tcb *thread)
+void thread_join(tcb *thread)
 {
 	while(thread->status != finished);
 }
@@ -219,7 +246,7 @@ void prototype_os()
 	for (i = 0; i < NUM_THREADS; i++)
 	{
 		tcb *new_thread;
-		mythread_create(i, new_thread, mythread, &i);
+		thread_create(i, new_thread, mythread, &i);
 	}
 	
 	// initialize the alarm to interrupt after 1 second and set the alarm's callback function
@@ -228,7 +255,7 @@ void prototype_os()
 	// join all threads on main (main paused until all threads finish)
 	for (i = 0; i < NUM_THREADS; i++)
 	{
-		mythread_join(run_queue[i]);
+		thread_join(run_queue[i]);
 	}
 
 	// loop endlessly
