@@ -16,10 +16,11 @@
 
 // compute the number of alarm ticks relative to system ticks per second
 #define ALARMTICKS(x) ((alt_ticks_per_second()*(x))/10)
-// define the number of threads
+// number of threads
 #define NUM_THREADS 12
-// define thread runtime
+// thread runtime
 #define MAX 10000
+// stack size
 #define STACK_SIZE 1000
 
 typedef enum {
@@ -73,8 +74,8 @@ void prune_queue();
  * prioritize threads in run queue
  */
 void prioritize_queue();
-/** deallocate thread workspace
- *
+/**
+ * deallocate thread workspace
  */
 void destroy_thread(tcb *thread);
 /**
@@ -97,7 +98,6 @@ tcb* current_thread;
 
 int main()
 {
-	//disable_interrupts();
 	// begin execution of the operating system
 	prototype_os();
 	return 0;
@@ -176,8 +176,6 @@ stack_context thread_scheduler(void *sp, void *fp)
 	stack_context context;
 	context.sp = current_thread->sp;
 	context.fp = current_thread->fp;
-//	*(context.sp + 17) = 1;
-//	*(context.sp + 18) = mythread;
 	return context;
 }
 
@@ -206,6 +204,7 @@ void prune_queue()
 			run_queue[i] = NULL;
 			run_queue_count--;
 			destroy_thread(thread);
+
 			// shift all remaining threads in the queue up
 			for(j = i; j < NUM_THREADS-1; j++)
 			{
@@ -257,10 +256,9 @@ void prototype_os()
 		tcb *new_thread;
 		thread_create(i, new_thread);
 	}
-	
+
 	// initialize the alarm to interrupt after 1 second and set the alarm's callback function
 	alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
-	//enable_interrupts();
 
 	// join all threads on main (main paused until all threads finish)
 	for (i = 0; i < NUM_THREADS; i++)
