@@ -58,6 +58,10 @@ void mythread(int thread_id);
  */
 void thread_create(int thread_id, tcb *thread);
 /**
+ * create a tcb for the main thread (and places at run_queue[0])
+ */
+void main_thread_create();
+/**
  * cause the main thread to wait on the provided thread
  */
 void thread_join(tcb *blocked_thread, tcb *blocking_thread);
@@ -130,9 +134,9 @@ void thread_create(int thread_id, tcb *thread)
 	t->thread_id = thread_id;
 	t->scheduled_count = 0;
 	t->joined_thread_count = 0;
-	// set stack pointer
-	t->fp = t + sizeof(tcb) + STACK_SIZE;
 	// set frame pointer
+	t->fp = t + sizeof(tcb) + STACK_SIZE;
+	// set stack pointer
 	t->sp = t->fp - 19;
 	// set the thread's function to run
 	*(t->sp + 18) = mythread; // set ea (function to run)
@@ -148,12 +152,29 @@ void thread_create(int thread_id, tcb *thread)
 	thread = t;
 }
 
+void main_thread_create()
+{
+	tcb *t = (tcb *)malloc(sizeof(tcb) + STACK_SIZE);
+	t->thread_id = 0;
+	t->scheduled_count = 0;
+	t->joined_thread_count = 0;
+	// set frame pointer
+	t->fp = t + sizeof(tcb) + STACK_SIZE;
+	// set stack pointer
+	t->sp = t->fp - 19;
+	*(t->sp + 17) = 1; // enable interrupts (estatus)
+
+	// add thread to run_queue
+	run_queue[0] = t;
+	// main is the currently running thread at creation
+	t->status = running;
+}
+
 void thread_join(tcb *blocked_thread, tcb *blocking_thread)
 {
 	blocked_thread->joined_thread_count++;
 	blocked_thread->status = blocked;
 	blocking_thread->blocker_of_thread = blocked_thread;
-	while(blocked_thread->status == blocked);
 }
 
 stack_context thread_scheduler(void *sp, void *fp)
@@ -177,6 +198,9 @@ stack_context thread_scheduler(void *sp, void *fp)
 	else
 	{
 		alt_printf("Interrupted by the DE2 timer!\n");
+		// prune the queue one last time to unblock main
+		prune_queue();
+		current_thread = run_queue[0];
 	}
 	// send the next-to-run thread's stack context back to assembly to be run
 	stack_context context;
@@ -236,7 +260,10 @@ void prototype_os()
 {
 	run_queue_count = 0;
     current_thread_index = 0;
-    // TODO create tcb for main, add it to the queue, and set it as current_thread
+
+    main_thread_create();
+    current_thread = run_queue[0];
+
 	int i;
 	// create new threads; set their function to execute to mythread
 	for (i = 1; i < NUM_THREADS+1; i++)
@@ -248,11 +275,16 @@ void prototype_os()
 	// initialize the alarm to interrupt after 1 second and set the alarm's callback function
 	alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
 
+	disable_interrupts();
 	// join all threads on main (main paused until all threads finish)
 	for (i = 1; i < NUM_THREADS+1; i++)
 	{
 		thread_join(current_thread, run_queue[i]);
 	}
+	enable_interrupts();
+
+	// spin until main is unblocked
+	while(run_queue[0]->status == blocked);
 
 	// loop endlessly
 	while(1)
