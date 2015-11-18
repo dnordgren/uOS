@@ -16,15 +16,17 @@
 
 // compute the number of alarm ticks relative to system ticks per second
 #define ALARMTICKS(x) ((alt_ticks_per_second()*(x))/10)
-// define the number of threads
+// number of threads
 #define NUM_THREADS 12
-// define thread runtime
+// thread runtime
 #define MAX 10000
+// stack size
 #define STACK_SIZE 1000
 
 typedef enum {
 	scheduled,
 	running,
+	blocked,
 	finished
 } thread_status;
 
@@ -37,6 +39,8 @@ typedef struct tcb {
 	int thread_id;
 	int scheduled_count;
 	thread_status status;
+	void *blocker_of_thread; /* pointer to thread this thread blocks */
+	int joined_thread_count; /* number of threads joined to (blocking) this thread */
 	int *sp;
 	int *fp;
 } tcb;
@@ -54,9 +58,13 @@ void mythread(int thread_id);
  */
 void thread_create(int thread_id, tcb *thread);
 /**
+ * create a tcb for the main thread (and places at run_queue[0])
+ */
+void main_thread_create();
+/**
  * cause the main thread to wait on the provided thread
  */
-void thread_join(tcb *thread);
+void thread_join(tcb *blocked_thread, tcb *blocking_thread);
 /**
  * yield the currently running thread; dispatch a new thread
  */
@@ -73,8 +81,12 @@ void prune_queue();
  * prioritize threads in run queue
  */
 void prioritize_queue();
-/** deallocate thread workspace
- *
+/**
+ * returns the index of the next available (unblocked) thread
+ */
+int get_next_available_thread_index();
+/**
+ * deallocate thread workspace
  */
 void destroy_thread(tcb *thread);
 /**
@@ -88,16 +100,17 @@ void enable_interrupts();
 alt_alarm alarm;
 /* used to determine whether interrupt handling should be modified to switch threads */
 int global_flag = 0;
-/* queue of threads to run */
-tcb *run_queue[NUM_THREADS];
+/* queue of threads to run; all threads + main */
+tcb *run_queue[NUM_THREADS+1];
 /* count of threads remaining in queue */
 int run_queue_count;
 /* the currently running thread */
 tcb* current_thread;
+/* the index of the currently running thread in the queue */
+int current_thread_index;
 
 int main()
 {
-	//disable_interrupts();
 	// begin execution of the operating system
 	prototype_os();
 	return 0;
@@ -120,9 +133,10 @@ void thread_create(int thread_id, tcb *thread)
 	tcb *t = (tcb *)malloc(sizeof(tcb) + STACK_SIZE);
 	t->thread_id = thread_id;
 	t->scheduled_count = 0;
-	// set stack pointer
-	t->fp = t + sizeof(tcb) + STACK_SIZE;
+	t->joined_thread_count = 0;
 	// set frame pointer
+	t->fp = t + sizeof(tcb) + STACK_SIZE;
+	// set stack pointer
 	t->sp = t->fp - 19;
 	// set the thread's function to run
 	*(t->sp + 18) = mythread; // set ea (function to run)
@@ -138,31 +152,44 @@ void thread_create(int thread_id, tcb *thread)
 	thread = t;
 }
 
-void thread_join(tcb *thread)
+void main_thread_create()
 {
-	if (thread != NULL)
-	{
-		while(thread->status != finished);
-	}
+	tcb *t = (tcb *)malloc(sizeof(tcb) + STACK_SIZE);
+	t->thread_id = 0;
+	t->scheduled_count = 0;
+	t->joined_thread_count = 0;
+	// set frame pointer
+	t->fp = t + sizeof(tcb) + STACK_SIZE;
+	// set stack pointer
+	t->sp = t->fp - 19;
+	*(t->sp + 17) = 1; // enable interrupts (estatus)
+
+	// add thread to run_queue
+	run_queue[0] = t;
+	// main is the currently running thread at creation
+	t->status = running;
+}
+
+void thread_join(tcb *blocked_thread, tcb *blocking_thread)
+{
+	blocked_thread->joined_thread_count++;
+	blocked_thread->status = blocked;
+	blocking_thread->blocker_of_thread = blocked_thread;
 }
 
 stack_context thread_scheduler(void *sp, void *fp)
 {
-	alt_printf("scheduling threads...\n");
-
 	// save the yielded thread's progress via sp, fp
 	current_thread->sp = (int *)sp;
 	current_thread->fp = (int *)fp;
 
+	// remove completed threads from the queue
+	prune_queue();
+
 	if(run_queue_count > 0)
 	{
-		// remove completed threads from the queue
-		prune_queue();
-		// reprioritize the queue
-		prioritize_queue();
-
 		// set the next-to-run to run as the current thread
-		current_thread = run_queue[0];
+		current_thread = run_queue[get_next_available_thread_index()];
 		// update next-to-run thread's number of times scheduled count
 		current_thread->scheduled_count++;
 
@@ -171,18 +198,22 @@ stack_context thread_scheduler(void *sp, void *fp)
 	else
 	{
 		alt_printf("Interrupted by the DE2 timer!\n");
+		// prune the queue one last time to unblock main
+		prune_queue();
+		current_thread = run_queue[0];
 	}
 	// send the next-to-run thread's stack context back to assembly to be run
 	stack_context context;
 	context.sp = current_thread->sp;
 	context.fp = current_thread->fp;
-//	*(context.sp + 17) = 1;
-//	*(context.sp + 18) = mythread;
 	return context;
 }
 
 void destroy_thread(tcb *thread)
 {
+	/* unblock the thread waiting on this thread */
+	tcb *thread_to_free = thread->blocker_of_thread;
+	if (thread_to_free != NULL) thread_to_free->joined_thread_count--;
 	alt_printf("thread %x destroyed; was scheduled %x times\n", thread->thread_id, thread->scheduled_count);
 	free(thread);
 }
@@ -194,11 +225,16 @@ void finish_thread()
 
 void prune_queue()
 {
-	int i, j;
+	int i;
 	// iterate through queue
-	for (i = 0; i < NUM_THREADS; i++)
+	for (i = 0; i < NUM_THREADS+1; i++)
 	{
 		tcb *thread = run_queue[i];
+		if (thread != NULL && thread->status == blocked)
+		{
+			/* unblock threads whose blocking threads have exited */
+			if (thread->joined_thread_count == 0) thread->status = scheduled;
+		}
 		// thread has finished and exited
 		if (thread != NULL && thread->status == finished)
 		{
@@ -206,67 +242,49 @@ void prune_queue()
 			run_queue[i] = NULL;
 			run_queue_count--;
 			destroy_thread(thread);
-			// shift all remaining threads in the queue up
-			for(j = i; j < NUM_THREADS-1; j++)
-			{
-				run_queue[j] = run_queue[j+1];
-			}
-			run_queue[NUM_THREADS-1] = NULL;
 		}
 	}
 }
 
-void prioritize_queue()
+int get_next_available_thread_index()
 {
-	// determine how many open spots are available in the queue
-	// snapshot the current highest priority thread
-	tcb *current_thread = run_queue[0];
-	if (current_thread == NULL)
-	{
-		alt_printf("run queue is empty");
-		return;
-	}
-	int i;
-	int flag = 0;
-	for(i = 0; i < NUM_THREADS-1; i++)
-	{
-		// the rest of the queue is empty slots
-		if (run_queue[i] == NULL)
-		{
-			// insert the former highest priority thread at the back of the queue
-			run_queue[i-1] = current_thread;
-			flag = 1;
-			break;
-		}
-		run_queue[i] = run_queue[i+1];
-	}
-	if (!flag)
-	{
-		// insert the former highest priority thread at the back of the queue
-		run_queue[NUM_THREADS-2] = current_thread;
-	}
+	tcb *t;
+	do {
+		if (++current_thread_index > NUM_THREADS) current_thread_index = 0;
+		t = run_queue[current_thread_index];
+	} while(t == NULL || t->status == blocked);
+	return current_thread_index;
 }
 
 void prototype_os()
 {
 	run_queue_count = 0;
+    current_thread_index = 0;
+
+    main_thread_create();
+    current_thread = run_queue[0];
+
 	int i;
 	// create new threads; set their function to execute to mythread
-	for (i = 0; i < NUM_THREADS; i++)
+	for (i = 1; i < NUM_THREADS+1; i++)
 	{
 		tcb *new_thread;
 		thread_create(i, new_thread);
 	}
-	
+
 	// initialize the alarm to interrupt after 1 second and set the alarm's callback function
 	alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
-	//enable_interrupts();
 
+	disable_interrupts();
 	// join all threads on main (main paused until all threads finish)
-	for (i = 0; i < NUM_THREADS; i++)
+	for (i = 1; i < NUM_THREADS+1; i++)
 	{
-		thread_join(run_queue[i]);
+		thread_join(current_thread, run_queue[i]);
 	}
+	enable_interrupts();
+
+	// spin until main is unblocked
+	while(run_queue[0]->status == blocked);
 
 	// loop endlessly
 	while(1)
@@ -282,7 +300,7 @@ alt_u32 interrupt_handler(void* context)
 {
 	alt_printf("Interrupted by timer!\n");
 	// schedule new thread
-	if (run_queue_count > 0) // TODO do we have to do this?
+	if (run_queue_count > 0)
 	{
 		global_flag = 1;
 	}
