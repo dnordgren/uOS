@@ -11,7 +11,7 @@
  */
 
 #include <stdlib.h>
-#include <malloc.h>
+//#include <malloc.h>
 // #include "sys/alt_stdio.h"
 // #include "sys/alt_alarm.h"
 // #include "alt_types.h"
@@ -143,17 +143,17 @@ void thread_create(int thread_id, tcb *thread)
     t->scheduled_count = 0;
     t->joined_thread_count = 0;
     /* set frame pointer */
-    t->fp = t + sizeof(tcb) + STACK_SIZE;
+    t->fp = (int *)(t + sizeof(tcb) + STACK_SIZE);
     /* set stack pointer relative to the frame pointer */
     t->sp = t->fp - 19;
     /* set the thread's function to run (ea) */
-    *(t->sp + 18) = mythread;
+    *(t->sp + 18) = *((int *)mythread);
     /* set r4 (argument for mythread) */
     *(t->sp + 5) = thread_id;
     /* enable interrupts (estatus) */
     *(t->sp + 17) = 1;
     /* set the thread's completion function (ra) */
-    *(t->sp) = finish_thread;
+    t->sp = (int *)finish_thread;
 
     /* add thread to run_queue and set status to scheduled */
     run_queue[thread_id] = t;
@@ -169,7 +169,7 @@ void main_thread_create()
     t->scheduled_count = 0;
     t->joined_thread_count = 0;
     /* set frame pointer */
-    t->fp = t + sizeof(tcb) + STACK_SIZE;
+    t->fp = (int *)(t + sizeof(tcb) + STACK_SIZE);
     /* set stack pointer relative to the frame pointer */
     t->sp = t->fp - 19;
     /* enable interrupts (estatus) */
@@ -292,13 +292,13 @@ void prototype_os()
     //alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
 
     /* disable interrupts until all threads have been joined to main */
-    disable_interrupts();
+    //disable_interrupts();
     for (i = 1; i < NUM_THREADS+1; i++)
     {
         /* join all threads on main (main paused until all threads finish) */
         thread_join(current_thread, run_queue[i]);
     }
-    enable_interrupts();
+    //enable_interrupts();
 
     /* spin until main is unblocked */
     while(run_queue[0]->status == blocked);
@@ -310,18 +310,6 @@ void prototype_os()
     }
 }
 
-// alt_u32 interrupt_handler(void* context)
-// {
-//     //alt_printf("Interrupted by timer!\n");
-//     /* schedule new thread (global flag observed by my_scheduler.S) */
-//     if (run_queue_count > 0)
-//     {
-//         global_flag = 1;
-//     }
-//     /* reset the alarm to interrupt next in 0.5 seconds */
-//     return ALARMTICKS(5);
-// }
-
 void reset_global_flag()
 {
     global_flag = 0;
@@ -332,13 +320,13 @@ int get_global_flag()
     return global_flag;
 }
 
-void disable_interrupts()
-{
-    asm("wrctl status, zero");
-}
+// void disable_interrupts()
+// {
+//     asm("wrctl status, zero");
+// }
 
-void enable_interrupts()
-{
-    asm("movi et, 1");
-    asm("wrctl status, et");
-}
+// void enable_interrupts()
+// {
+//     asm("movi et, 1");
+//     asm("wrctl status, et");
+// }
