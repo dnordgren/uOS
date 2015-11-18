@@ -11,12 +11,12 @@
  */
 
 #include <stdlib.h>
-//#include <malloc.h>
+// #include <malloc.h>
 // #include "sys/alt_stdio.h"
 // #include "sys/alt_alarm.h"
 // #include "alt_types.h"
 
-// compute the number of alarm ticks relative to system ticks per second
+/* compute the number of alarm ticks relative to system ticks per second */
 // #define ALARMTICKS(x) ((alt_ticks_per_second()*(x))/10)
 /* number of threads */
 #define NUM_THREADS 12
@@ -25,6 +25,7 @@
 /* stack size */
 #define STACK_SIZE 1000
 
+/* represents a thread's status in the queue */
 typedef enum {
     scheduled,
     running,
@@ -32,19 +33,21 @@ typedef enum {
     finished
 } thread_status;
 
+/* used to pass frame and stack pointers to/from assembly */
 typedef struct stack_context {
     int *sp;
     int *fp;
 } stack_context;
 
+/* thread control block */
 typedef struct tcb {
     int thread_id;
-    int scheduled_count;
-    thread_status status;
+    int scheduled_count; /* the number of times the thread has been scheduled */
+    thread_status status; /* thread's status in queue */
     void *blocker_of_thread; /* pointer to thread this thread blocks */
     int joined_thread_count; /* number of threads joined to (blocking) this thread */
-    int *sp;
-    int *fp;
+    int *sp; /* stack pointer */
+    int *fp; /* frame pointer */
 } tcb;
 
 /**
