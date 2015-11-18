@@ -153,7 +153,7 @@ void thread_join(tcb *blocked_thread, tcb *blocking_thread)
 	blocked_thread->joined_thread_count++;
 	blocked_thread->status = blocked;
 	blocking_thread->blocker_of_thread = blocked_thread;
-	while(blocked_thread->status != finished);
+	while(blocked_thread->status != blocked);
 }
 
 stack_context thread_scheduler(void *sp, void *fp)
