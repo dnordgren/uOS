@@ -153,7 +153,7 @@ void thread_join(tcb *blocked_thread, tcb *blocking_thread)
 	blocked_thread->joined_thread_count++;
 	blocked_thread->status = blocked;
 	blocking_thread->blocker_of_thread = blocked_thread;
-	while(blocked_thread->status != blocked);
+	while(blocked_thread->status == blocked);
 }
 
 stack_context thread_scheduler(void *sp, void *fp)
@@ -164,8 +164,7 @@ stack_context thread_scheduler(void *sp, void *fp)
 
 	// remove completed threads from the queue
 	prune_queue();
-	// reprioritize the queue
-	// prioritize_queue();
+
 	if(run_queue_count > 0)
 	{
 		// set the next-to-run to run as the current thread
@@ -223,44 +222,13 @@ void prune_queue()
 	}
 }
 
-void prioritize_queue()
-{
-	// determine how many open spots are available in the queue
-	// snapshot the current highest priority thread
-	tcb *current_thread = run_queue[0];
-	if (current_thread == NULL)
-	{
-		alt_printf("run queue is empty");
-		return;
-	}
-	int i;
-	int flag = 0;
-	for(i = 0; i < NUM_THREADS-1; i++)
-	{
-		// the rest of the queue is empty slots
-		if (run_queue[i] == NULL)
-		{
-			// insert the former highest priority thread at the back of the queue
-			run_queue[i-1] = current_thread;
-			flag = 1;
-			break;
-		}
-		run_queue[i] = run_queue[i+1];
-	}
-	if (!flag)
-	{
-		// insert the former highest priority thread at the back of the queue
-		run_queue[NUM_THREADS-2] = current_thread;
-	}
-}
-
 int get_next_available_thread_index()
 {
 	tcb *t;
 	do {
-		if (++current_thread_index > NUM_THREADS+1) current_thread_index = 0;
+		if (++current_thread_index > NUM_THREADS) current_thread_index = 0;
 		t = run_queue[current_thread_index];
-	} while(t != NULL && t->status != blocked);
+	} while(t == NULL || t->status == blocked);
 	return current_thread_index;
 }
 
