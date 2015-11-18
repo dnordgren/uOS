@@ -26,7 +26,7 @@
 typedef enum {
 	scheduled,
 	running,
-    blocked,
+	blocked,
 	finished
 } thread_status;
 
@@ -39,8 +39,8 @@ typedef struct tcb {
 	int thread_id;
 	int scheduled_count;
 	thread_status status;
-    int *blocker_of_thread; /* pointer to thread this thread blocks */
-    int joined_thread_count; /* number of threads joined to (blocking) this thread */
+	int *blocker_of_thread; /* pointer to thread this thread blocks */
+	int joined_thread_count; /* number of threads joined to (blocking) this thread */
 	int *sp;
 	int *fp;
 } tcb;
@@ -129,7 +129,7 @@ void thread_create(int thread_id, tcb *thread)
 	tcb *t = (tcb *)malloc(sizeof(tcb) + STACK_SIZE);
 	t->thread_id = thread_id;
 	t->scheduled_count = 0;
-    t->joined_thread_count = 0;
+	t->joined_thread_count = 0;
 	// set stack pointer
 	t->fp = t + sizeof(tcb) + STACK_SIZE;
 	// set frame pointer
@@ -150,9 +150,9 @@ void thread_create(int thread_id, tcb *thread)
 
 void thread_join(tcb *blocked_thread, tcb *blocking_thread)
 {
-    blocked_thread->joined_thread_count++;
-    blocked_thread->status = blocked;
-    blocking_thread->blocker_of_thread = blocked_thread;
+	blocked_thread->joined_thread_count++;
+	blocked_thread->status = blocked;
+	blocking_thread->blocker_of_thread = blocked_thread;
 	while(blocked_thread->status != finished);
 }
 
@@ -162,10 +162,10 @@ stack_context thread_scheduler(void *sp, void *fp)
 	current_thread->sp = (int *)sp;
 	current_thread->fp = (int *)fp;
 
-    // remove completed threads from the queue
-    prune_queue();
-    // reprioritize the queue
-    // prioritize_queue();
+	// remove completed threads from the queue
+	prune_queue();
+	// reprioritize the queue
+	// prioritize_queue();
 	if(run_queue_count > 0)
 	{
 		// set the next-to-run to run as the current thread
@@ -188,9 +188,9 @@ stack_context thread_scheduler(void *sp, void *fp)
 
 void destroy_thread(tcb *thread)
 {
-    /* unblock the thread waiting on this thread */
-    int *thread_to_free = thread->blocker_of_thread;
-    if (thread_to_free != NULL) thread_to_free->joined_thread_count--;
+	/* unblock the thread waiting on this thread */
+	int *thread_to_free = thread->blocker_of_thread;
+	if (thread_to_free != NULL) thread_to_free->joined_thread_count--;
 	alt_printf("thread %x destroyed; was scheduled %x times\n", thread->thread_id, thread->scheduled_count);
 	free(thread);
 }
@@ -207,11 +207,11 @@ void prune_queue()
 	for (i = 0; i < NUM_THREADS+1; i++)
 	{
 		tcb *thread = run_queue[i];
-        if (thread != NULL && thread->status == blocked)
-        {
-            /* unblock threads whose blocking threads have exited */
-            if (thread->joined_thread_count == 0) thread->status = scheduled;
-        }
+		if (thread != NULL && thread->status == blocked)
+		{
+			/* unblock threads whose blocking threads have exited */
+			if (thread->joined_thread_count == 0) thread->status = scheduled;
+		}
 		// thread has finished and exited
 		if (thread != NULL && thread->status == finished)
 		{
@@ -256,11 +256,11 @@ void prioritize_queue()
 
 int get_next_available_thread_index()
 {
-    do {
-        if (++current_thread_index > NUM_THREADS+1) current_thread_index = 0;
-        tcb *t = run_queue[current_thread_index];
-    } while(t != NULL && t->status != blocked);
-    return current_thread_index;
+	do {
+		if (++current_thread_index > NUM_THREADS+1) current_thread_index = 0;
+		tcb *t = run_queue[current_thread_index];
+	} while(t != NULL && t->status != blocked);
+	return current_thread_index;
 }
 
 void prototype_os()
