@@ -11,7 +11,7 @@ Operating System Kernels CSCE 351 Fall 2015
   threads that are scheduled and run.
 - `tcb.h`, `tcb.c`: provide thread control block related functions like create,
   join, and destroy; also defines the `tcb` structure.
-- `my_scheduler.S`: contains assembly that is "injected" into `alt_exception_entry.S" at
+- `my_scheduler.S`: contains assembly that is "injected" into `alt_exception_entry.S` at
   interrupt handling-time. Using the `global_flag` defined in `main.c`, this code
   causes `alt_exception_entry.S` to resume a new thread on interrupt rather than
   the interrupted thread.
