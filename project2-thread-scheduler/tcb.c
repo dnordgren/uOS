@@ -12,6 +12,10 @@
 
 #include "tcb.h"
 
+#include "sys/alt_stdio.h"
+#include "sys/alt_alarm.h"
+#include "alt_types.h"
+
 void thread_create(int thread_id, tcb *thread, void (*run), void (*callback))
 {
     /* allocate memory for the thread's workspace and stack */
