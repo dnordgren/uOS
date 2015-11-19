@@ -12,12 +12,12 @@
 
 #include "tcb.h"
 
-// #include "sys/alt_stdio.h"
-// #include "sys/alt_alarm.h"
-// #include "alt_types.h"
+#include "sys/alt_stdio.h"
+#include "sys/alt_alarm.h"
+#include "alt_types.h"
 
 /* compute the number of alarm ticks relative to system ticks per second */
-// #define ALARMTICKS(x) ((alt_ticks_per_second()*(x))/10)
+#define ALARMTICKS(x) ((alt_ticks_per_second()*(x))/10)
 /* number of threads */
 #define NUM_THREADS 12
 /* thread runtime */
@@ -38,7 +38,7 @@ stack_context thread_scheduler(void *sp, void *fp);
 /**
  * callback function for alarm interrupt
  */
-//alt_u32 interrupt_handler(void* context);
+alt_u32 interrupt_handler(void* context);
 /**
  * remove completed threads from run queuue
  */
@@ -61,7 +61,7 @@ void disable_interrupts();
 void enable_interrupts();
 
 /* the alarm that will regularly interrupt program execution */
-//alt_alarm alarm;
+alt_alarm alarm;
 /* used to determine whether interrupt handling should be modified to switch threads */
 int global_flag = 0;
 /* queue of threads to run; all threads + main */
@@ -95,7 +95,7 @@ void prototype_os()
     }
 
     /* initialize the alarm; set the alarm's callback function */
-    //alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
+    alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
 
     /* disable interrupts until all threads have been joined to main */
     disable_interrupts();
@@ -111,7 +111,7 @@ void prototype_os()
 
     while(1)
     {
-        // alt_printf("Hello from uOS!\n");
+        alt_printf("Hello from uOS!\n");
         for (i = 0; i < 10000; i++);
     }
 }
@@ -122,7 +122,7 @@ void mythread(int thread_id)
     n = (thread_id % 2 == 0) ? 10 : 15;
     for (i = 0; i < n; i++)
     {
-        // alt_printf("This is message %x of thread # %x.\n", i, thread_id);
+        alt_printf("This is message %x of thread # %x.\n", i, thread_id);
         for (j = 0; j < MAX; j++);
     }
 }
@@ -144,12 +144,12 @@ stack_context thread_scheduler(void *sp, void *fp)
         /* update next-to-run thread's number of times scheduled count */
         current_thread->scheduled_count++;
 
-        // alt_printf("next thread to run: %x\n", current_thread->thread_id);
+        alt_printf("next thread to run: %x\n", current_thread->thread_id);
     }
     /* all non-main threads have exited */
     else
     {
-        // alt_printf("Interrupted by the DE2 timer!\n");
+        alt_printf("Interrupted by the DE2 timer!\n");
         /* prune queue one last time to unblock main; set main as running thread */
         prune_queue();
         current_thread = run_queue[0];
@@ -212,13 +212,13 @@ int get_global_flag()
 
 void disable_interrupts()
 {
-//     asm("wrctl status, zero");
+    asm("wrctl status, zero");
 }
 
 void enable_interrupts()
 {
-//     asm("movi et, 1");
-//     asm("wrctl status, et");
+    asm("movi et, 1");
+    asm("wrctl status, et");
 }
 
 int main()

@@ -67,6 +67,6 @@ void destroy_thread(tcb *thread)
     /* unblock the thread waiting on this thread */
     tcb *thread_to_free = thread->blocker_of_thread;
     if (thread_to_free != NULL) thread_to_free->joined_thread_count--;
-    // alt_printf("thread %x destroyed; was scheduled %x times\n", thread->thread_id, thread->scheduled_count);
+    alt_printf("thread %x destroyed; was scheduled %x times\n", thread->thread_id, thread->scheduled_count);
     free(thread);
 }
