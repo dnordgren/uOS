@@ -1,5 +1,5 @@
 /**
- * Operating Syste Kernels, CSCE 351
+ * Operating System Kernels, CSCE 351 Fall 2015
  * Project 2, Thread Scheduler
  *
  * main.c
@@ -10,8 +10,8 @@
  * to execute the main thread.
  */
 
-#include <stdlib.h>
-// #include <malloc.h>
+#include "tcb.h"
+
 // #include "sys/alt_stdio.h"
 // #include "sys/alt_alarm.h"
 // #include "alt_types.h"
@@ -22,33 +22,6 @@
 #define NUM_THREADS 12
 /* thread runtime */
 #define MAX 10000
-/* stack size */
-#define STACK_SIZE 1000
-
-/* represents a thread's status in the queue */
-typedef enum {
-    scheduled,
-    running,
-    blocked,
-    finished
-} thread_status;
-
-/* used to pass frame and stack pointers to/from assembly */
-typedef struct stack_context {
-    int *sp;
-    int *fp;
-} stack_context;
-
-/* thread control block */
-typedef struct tcb {
-    int thread_id;
-    int scheduled_count; /* the number of times the thread has been scheduled */
-    thread_status status; /* thread's status in queue */
-    void *blocker_of_thread; /* pointer to thread this thread blocks */
-    int joined_thread_count; /* number of threads joined to (blocking) this thread */
-    int *sp; /* stack pointer */
-    int *fp; /* frame pointer */
-} tcb;
 
 /**
  * entry point to prototype operating system
@@ -58,18 +31,6 @@ void prototype_os();
  * body of work each thread is to complete
  */
 void mythread(int thread_id);
-/**
- * create new thread
- */
-void thread_create(int thread_id, tcb *thread);
-/**
- * creates a tcb for the main thread (and places at run_queue[0])
- */
-void main_thread_create();
-/**
- * cause the main thread to wait on the provided thread
- */
-void thread_join(tcb *blocked_thread, tcb *blocking_thread);
 /**
  * yield the currently running thread; dispatch a new thread
  */
@@ -83,17 +44,9 @@ stack_context thread_scheduler(void *sp, void *fp);
  */
 void prune_queue();
 /**
- * prioritize threads in run queue
- */
-void prioritize_queue();
-/**
  * returns the index of the next available (unblocked) thread
  */
 int get_next_available_thread_index();
-/**
- * deallocate thread workspace
- */
-void destroy_thread(tcb *thread);
 /**
  * mark thread as finished ("callback"/ra for thread completion)
  */
@@ -120,11 +73,47 @@ tcb* current_thread;
 /* the index of the currently running thread in the queue */
 int current_thread_index;
 
-int main()
+void prototype_os()
 {
-    /* begin execution of the operating system */
-    prototype_os();
-    return 0;
+    run_queue_count = 0;
+    current_thread_index = 0;
+
+    /* create a tcb for the main thread and set it as the running thread */
+    tcb *main_thread;
+    main_thread_create(main_thread);
+    run_queue[0] = main_thread;
+    current_thread = run_queue[0];
+
+    int i;
+    /* create new threads; set their function to execute to mythread */
+    for (i = 1; i < NUM_THREADS+1; i++)
+    {
+        tcb *new_thread;
+        thread_create(i, new_thread, mythread, finish_thread);
+        run_queue[i] = new_thread;
+        run_queue_count++;
+    }
+
+    /* initialize the alarm; set the alarm's callback function */
+    //alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
+
+    /* disable interrupts until all threads have been joined to main */
+    disable_interrupts();
+    for (i = 1; i < NUM_THREADS+1; i++)
+    {
+        /* join all threads on main (main paused until all threads finish) */
+        thread_join(current_thread, run_queue[i]);
+    }
+    enable_interrupts();
+
+    /* spin until main is unblocked */
+    while(run_queue[0]->status == blocked);
+
+    while(1)
+    {
+        // alt_printf("Hello from uOS!\n");
+        for (i = 0; i < 10000; i++);
+    }
 }
 
 void mythread(int thread_id)
@@ -136,60 +125,6 @@ void mythread(int thread_id)
         // alt_printf("This is message %x of thread # %x.\n", i, thread_id);
         for (j = 0; j < MAX; j++);
     }
-}
-
-void thread_create(int thread_id, tcb *thread)
-{
-    /* allocate memory for the thread's workspace and stack */
-    tcb *t = (tcb *)malloc(sizeof(tcb) + STACK_SIZE);
-    t->thread_id = thread_id;
-    t->scheduled_count = 0;
-    t->joined_thread_count = 0;
-    /* set frame pointer */
-    t->fp = (int *)(t + sizeof(tcb) + STACK_SIZE);
-    /* set stack pointer relative to the frame pointer */
-    t->sp = t->fp - 19;
-    /* set the thread's function to run (ea) */
-    *(t->sp + 18) = *((int *)mythread);
-    /* set r4 (argument for mythread) */
-    *(t->sp + 5) = thread_id;
-    /* enable interrupts (estatus) */
-    *(t->sp + 17) = 1;
-    /* set the thread's completion function (ra) */
-    t->sp = (int *)finish_thread;
-
-    /* add thread to run_queue and set status to scheduled */
-    run_queue[thread_id] = t;
-    run_queue_count++;
-    t->status = scheduled;
-    thread = t;
-}
-
-void main_thread_create()
-{
-    tcb *t = (tcb *)malloc(sizeof(tcb) + STACK_SIZE);
-    t->thread_id = 0;
-    t->scheduled_count = 0;
-    t->joined_thread_count = 0;
-    /* set frame pointer */
-    t->fp = (int *)(t + sizeof(tcb) + STACK_SIZE);
-    /* set stack pointer relative to the frame pointer */
-    t->sp = t->fp - 19;
-    /* enable interrupts (estatus) */
-    *(t->sp + 17) = 1;
-
-    /* add thread to run_queue and set status to running */
-    run_queue[0] = t;
-    t->status = running;
-}
-
-void thread_join(tcb *blocked_thread, tcb *blocking_thread)
-{
-    /* increment blocked thread's joined count and set status to blocked */
-    blocked_thread->joined_thread_count++;
-    blocked_thread->status = blocked;
-    /* tell blocking thread which thread it's blocking */
-    blocking_thread->blocker_of_thread = blocked_thread;
 }
 
 stack_context thread_scheduler(void *sp, void *fp)
@@ -226,20 +161,6 @@ stack_context thread_scheduler(void *sp, void *fp)
     return context;
 }
 
-void destroy_thread(tcb *thread)
-{
-    /* unblock the thread waiting on this thread */
-    tcb *thread_to_free = thread->blocker_of_thread;
-    if (thread_to_free != NULL) thread_to_free->joined_thread_count--;
-    // alt_printf("thread %x destroyed; was scheduled %x times\n", thread->thread_id, thread->scheduled_count);
-    free(thread);
-}
-
-void finish_thread()
-{
-    current_thread->status = finished;
-}
-
 void prune_queue()
 {
     int i;
@@ -274,43 +195,9 @@ int get_next_available_thread_index()
     return current_thread_index;
 }
 
-void prototype_os()
+void finish_thread()
 {
-    run_queue_count = 0;
-    current_thread_index = 0;
-
-    /* create a tcb for the main thread and set it as the running thread */
-    main_thread_create();
-    current_thread = run_queue[0];
-
-    int i;
-    /* create new threads; set their function to execute to mythread */
-    for (i = 1; i < NUM_THREADS+1; i++)
-    {
-        tcb *new_thread;
-        thread_create(i, new_thread);
-    }
-
-    /* initialize the alarm; set the alarm's callback function */
-    //alt_alarm_start(&alarm, alt_ticks_per_second(), interrupt_handler, NULL);
-
-    /* disable interrupts until all threads have been joined to main */
-    //disable_interrupts();
-    for (i = 1; i < NUM_THREADS+1; i++)
-    {
-        /* join all threads on main (main paused until all threads finish) */
-        thread_join(current_thread, run_queue[i]);
-    }
-    //enable_interrupts();
-
-    /* spin until main is unblocked */
-    while(run_queue[0]->status == blocked);
-
-    while(1)
-    {
-        // alt_printf("Hello from uOS!\n");
-        for (i = 0; i < 10000; i++);
-    }
+    current_thread->status = finished;
 }
 
 void reset_global_flag()
@@ -323,13 +210,20 @@ int get_global_flag()
     return global_flag;
 }
 
-// void disable_interrupts()
-// {
+void disable_interrupts()
+{
 //     asm("wrctl status, zero");
-// }
+}
 
-// void enable_interrupts()
-// {
+void enable_interrupts()
+{
 //     asm("movi et, 1");
 //     asm("wrctl status, et");
-// }
+}
+
+int main()
+{
+    /* begin execution of the operating system */
+    prototype_os();
+    return 0;
+}
