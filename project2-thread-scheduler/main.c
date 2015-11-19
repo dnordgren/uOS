@@ -161,6 +161,18 @@ stack_context thread_scheduler(void *sp, void *fp)
     return context;
 }
 
+alt_u32 interrupt_handler(void* context)
+{
+	alt_printf("Interrupted by timer!\n");
+	// schedule new thread
+	if (run_queue_count > 0)
+	{
+		global_flag = 1;
+	}
+	// reset the alarm to interrupt next in 0.5 seconds
+	return ALARMTICKS(5);
+}
+
 void prune_queue()
 {
     int i;
