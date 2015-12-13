@@ -22,4 +22,3 @@ mov  sp, r2								/* load the next/new stack pointer */
 ldw  fp, -4(sp)							/* load the next/new frame pointer */
 jump_here:								/* in the following, there is certain code that will be executed to restore the context from the stack pointed by the new sp
 										   at the section ".exceptions.exit.label" in altera\90sp2\nios2eds\components\altera_nios2\HAL\src\alt_exception_entry.S */
-

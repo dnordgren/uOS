@@ -6,8 +6,7 @@
 #include "thread_handler.h"
 #include "queue.h"
 
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-/* The two macros are extremely useful by turnning on/off interrupts when atomicity is required */
+/* The two macros are extremely useful by turning on/off interrupts when atomicity is required */
 #define DISABLE_INTERRUPTS() {  \
     asm("wrctl status, zero");  \
 }
@@ -59,28 +58,25 @@ tcb *mythread_create(unsigned int tid, unsigned int stack_size, void (*mythread)
 /* NEW ----> READY */
 void mythread_start(tcb *thread_pointer)
 {
-    // assert(thread_pointer && thread_pointer->state == NEW);
     thread_pointer->state = READY;
 }
 
 /* READY --push into--> readyQ */
 void mythread_join(tcb *thread_pointer)
 {
-    // assert(thread_pointer && thread_pointer->state == READY);
     enqueue((void *)thread_pointer);
 }
 
 /* RUNNING ----> BLOCKED */
 void mythread_block(tcb *thread_pointer)
 {
-    // assert(thread_pointer && thread_pointer->state == RUNNING);
+	printf("thread %u is now blocked\n", thread_pointer->tid);
     thread_pointer->state = BLOCKED;
 }
 
 /* RUNNING ----> TERMINATED */
 void mythread_terminate(tcb *thread_pointer)
 {
-    // assert(thread_pointer && thread_pointer->state == RUNNING);
     thread_pointer->state = TERMINATED;
 }
 
@@ -90,8 +86,6 @@ void *mythread_schedule(void *context)
     {
         if (current_running_thread != NULL)
         {
-            // assert(current_running_thread->state == RUNNING);
-            // assert(main_stack_pointer != NULL);
             current_running_thread->state = READY;
             current_running_thread->stack_pointer = (unsigned int *)context;
             enqueue(current_running_thread);
@@ -100,9 +94,8 @@ void *mythread_schedule(void *context)
         {
             main_stack_pointer = (unsigned int *)context;
         }
-        
         current_running_thread = (tcb *)dequeue();
-        // assert(current_running_thread->state == READY);
+        printf("current running thread after dequeue: %u\n", current_running_thread->tid);
         current_running_thread->state = RUNNING;
         
         context = (void *)(current_running_thread->stack_pointer);

@@ -26,7 +26,7 @@ typedef struct
 } tcb;
 
 /* the current running thread */
-static tcb *current_running_thread = NULL;
+extern tcb *current_running_thread;
 
 /* declaration */
 tcb *mythread_create(unsigned int tid, unsigned int stack_size, void (*mythread)(void));

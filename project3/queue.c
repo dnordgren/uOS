@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "queue.h"
+#include "thread_handler.h"
 
 static Q_type queue = {NULL, NULL, 0};
 
@@ -35,10 +36,36 @@ void *dequeue()
     if (queue.size != 0)
     {
         elem = queue.head;
+        tcb *thread = (tcb *)elem->data;
+        while ((thread != NULL) && (thread->state == BLOCKED))
+        {
+        	elem = elem == queue.tail ? queue.head : elem->next;
+        	thread = (tcb *)elem->data;
+        }
+
         if (queue.size == 1)
             queue.tail = NULL;
-        queue.head = queue.head->next;
         
+        if (elem == queue.head)
+        {
+            queue.head = elem->next;
+        }
+        else
+        {
+        	E_type *queue_item = queue.head;
+        	while (queue_item->next != elem)
+        	{
+        		queue_item = queue_item->next;
+        	}
+
+        	queue_item->next = elem->next;
+
+        	if (queue.tail == elem)
+        	{
+        		queue.tail = queue_item;
+        	}
+        }
+
         queue.size--;
         data = elem->data;
         free(elem);

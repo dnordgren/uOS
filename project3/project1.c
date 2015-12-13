@@ -19,8 +19,11 @@ int bee_collect_count = 0; /* how many times a bee has deposited honey */
 sem *pot_full;
 sem *mutex;
 
+tcb *current_running_thread = NULL;
+
 void bear_thangs()
 {
+	unsigned int i;
 	while (bear_eat_count < BEAR_THREAD_LIFE)
 	{
 		sem_down(pot_full);
@@ -28,17 +31,19 @@ void bear_thangs()
 		bear_eat_count++;
 		printf("I'm a bear and I just ate honey for the %ith time. Mmmmmmmmmmmmm, honey.\n", bear_eat_count);
 		sem_up(mutex);
+		for (i = 0; i < 10*MAX; i++);
 	}
 }
 
 void bee_stuff()
 {
+	unsigned int i;
 	while (bee_collect_count < NUM_BEES*BEE_THREAD_LIFE)
 	{
 		sem_down(mutex);
 		num_honey++;
 		bee_collect_count++;
-		printf("Buzz buzz I'm a bee, I just collected honey buzz buzz. The pot has %i honey.\n", num_honey);
+		printf("Buzz buzz I'm bee %u, I just collected honey buzz buzz. The pot has %i honey.\n", current_running_thread->tid, num_honey);
 		if (num_honey == HONEY_POT_SIZE)
 		{
 			sem_up(pot_full); /* the bee that fills the pot wakes the bear */
@@ -47,6 +52,7 @@ void bee_stuff()
 		{
 			sem_up(mutex);
 		}
+		for (i = 0; i < 10*MAX; i++);
 	}
 }
     
@@ -62,11 +68,12 @@ void os_primitive()
     for (i = 0; i < NUM_BEES; i++)
     {
     	thread = mythread_create(i, 4096, bee_stuff);
+    	printf("thread %u just created\n", thread->tid);
     	mythread_start(thread);
     	mythread_join(thread);
     }
 
-    thread = mythread_create(10, 4096, bear_thangs);
+    thread = mythread_create(NUM_BEES, 4096, bear_thangs);
     mythread_start(thread);
     mythread_join(thread);
     

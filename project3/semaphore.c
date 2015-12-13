@@ -6,6 +6,7 @@
 #include "thread_handler.h"
 
 #include <stdlib.h> /* for NULL */
+#include <stdio.h> /* for printf */
 
 #define DISABLE_INTERRUPTS() {  \
     asm("wrctl status, zero");  \
@@ -29,17 +30,25 @@ sem * sem_create(int value)
 void sem_up(sem *sem)
 {
 	DISABLE_INTERRUPTS()
+	printf("Thread %u entered sem_up\n", current_running_thread->tid);
+	printf("sem value: %i\n", sem->value);
 	if (sem->value != 0)
 	{
 		sem->value++;
+		printf("incremented sem value to %i\n", sem->value);
 	}
 	else /* sem value == 0 */
 	{
 		if (sem->head != NULL)
 		{
 			mythread_start(sem->head->thread); /* unblock the longest waiting thread*/
-			free(sem->head); /* remove the thread from the semaphore's queue */
 			sem->head = sem->head->next;
+			free(sem->head); /* remove the thread from the semaphore's queue */
+		}
+		else /* queue is empty */
+		{
+			sem->value++;
+			printf("incremented sem value to %i\n", sem->value);
 		}
 	}
 	ENABLE_INTERRUPTS()
@@ -48,13 +57,18 @@ void sem_up(sem *sem)
 void sem_down(sem *sem)
 {
 	DISABLE_INTERRUPTS()
+	printf("Thread %u entered sem_down\n", current_running_thread->tid);
+	printf("sem value: %i\n", sem->value);
 	if (sem->value > 0)
 	{
 		sem->value--;
+		printf("decremented sem value to %i\n", sem->value);
+		ENABLE_INTERRUPTS()
 	}
 	else /* down on zero; sleep the current thread */
 	{
 		wait_q *queue_item = (wait_q *)malloc(sizeof(wait_q));
+		printf("Adding thread %u to semaphore wait queue\n", current_running_thread->tid);
 		queue_item->thread = current_running_thread;
 
 		if (sem->head == NULL) /* queue not initialized */
@@ -71,8 +85,9 @@ void sem_down(sem *sem)
 		}
 		sem->wait_count++;
 		mythread_block(queue_item->thread);
+		ENABLE_INTERRUPTS()
+		while(queue_item->thread->state == BLOCKED);
 	}
-	ENABLE_INTERRUPTS()
 }
 
 void sem_delete(sem *sem)
