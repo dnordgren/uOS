@@ -10,7 +10,7 @@ static Q_type queue = {NULL, NULL, 0};
 void enqueue(void *data)
 {
     E_type  *elem;
-    
+
     if ((elem = (E_type *)malloc(sizeof(E_type))) == NULL)
     {
         printf("Unable to allocate space!\n");
@@ -18,7 +18,7 @@ void enqueue(void *data)
     }
     elem->data = data;
     elem->next = NULL;
-    
+
     if (queue.head == NULL)
         queue.head = elem;
     else
@@ -32,11 +32,12 @@ void *dequeue()
 {
     E_type  *elem;
     void    *data = NULL;
-    
+
     if (queue.size != 0)
     {
         elem = queue.head;
         tcb *thread = (tcb *)elem->data;
+        /* grab the next unblocked thread for execution */
         while ((thread != NULL) && (thread->state == BLOCKED))
         {
         	elem = elem == queue.tail ? queue.head : elem->next;
@@ -45,7 +46,7 @@ void *dequeue()
 
         if (queue.size == 1)
             queue.tail = NULL;
-        
+
         if (elem == queue.head)
         {
             queue.head = elem->next;
@@ -66,11 +67,12 @@ void *dequeue()
         	}
         }
 
+        /* remove the element from the run queue */
         queue.size--;
         data = elem->data;
         free(elem);
     }
-        
+
     return data;
 }
 

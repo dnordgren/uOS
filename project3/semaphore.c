@@ -5,8 +5,8 @@
 #include "semaphore.h"
 #include "thread_handler.h"
 
-#include <stdlib.h> /* for NULL */
-#include <stdio.h> /* for printf */
+#include <stdlib.h> /* NULL */
+#include <stdio.h> /* printf */
 
 #define DISABLE_INTERRUPTS() {  \
     asm("wrctl status, zero");  \
@@ -46,12 +46,13 @@ void sem_down(sem *sem)
 	DISABLE_INTERRUPTS()
 	if (sem->value > 0)
 	{
-		sem->value--;
+		sem->value--; /* resource(s) available for requesting thread */
 		ENABLE_INTERRUPTS()
+        return;
 	}
 	else /* down on zero; sleep the current thread */
 	{
-		wait_q *queue_item = (wait_q *)malloc(sizeof(wait_q));
+		wait_q *queue_item = (wait_q *)malloc(sizeof(wait_q)); /* create new queue item */
 		printf("Adding thread %u to semaphore wait queue\n", current_running_thread->tid);
 		queue_item->thread = current_running_thread;
 
@@ -70,10 +71,14 @@ void sem_down(sem *sem)
 		sem->wait_count++;
 		mythread_block(queue_item->thread);
 		ENABLE_INTERRUPTS()
-		while(sem->value == 0);
+		while(sem->value == 0); /* wait until unblocked */
 		DISABLE_INTERRUPTS()
+        /* (atomic) the resource will be used by the newly unblocked thread next */
+        /* time its scheduled so remove a resource now to prevent another thread */
+        /* from reserving a resource that's unavailable */
 		sem->value--;
 		ENABLE_INTERRUPTS()
+        return;
 	}
 }
 

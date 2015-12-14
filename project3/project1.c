@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h> /* printf */
 
 #include "alarm_handler.h"
 #include "thread_handler.h"
@@ -24,7 +24,7 @@ tcb *current_running_thread = NULL;
 void bear_thangs()
 {
 	unsigned int i;
-	while (bear_eat_count < BEAR_THREAD_LIFE)
+	while (bear_eat_count < BEAR_THREAD_LIFE) /* run until the bear has expired */
 	{
 		sem_down(pot_full);
 		num_honey = 0;
@@ -33,7 +33,7 @@ void bear_thangs()
 		sem_up(mutex);
 		for (i = 0; i < MAX; i++);
 	}
-	/* the bear has died; free semaphores */
+	/* the bear has finished; free semaphores */
 	sem_delete(pot_full);
 	sem_delete(mutex);
 }
@@ -41,7 +41,7 @@ void bear_thangs()
 void bee_stuff()
 {
 	unsigned int i;
-	while (bee_collect_count < NUM_BEES*BEE_THREAD_LIFE)
+	while (bee_collect_count < NUM_BEES*BEE_THREAD_LIFE) /* run until all honey has been deposited */
 	{
 		sem_down(mutex);
 		num_honey++;
@@ -58,7 +58,7 @@ void bee_stuff()
 		for (i = 0; i < MAX; i++);
 	}
 }
-    
+
 void os_primitive()
 {
 	/* initialize semaphores */
@@ -67,7 +67,7 @@ void os_primitive()
 
     unsigned int i;
     tcb *thread;
-
+    /* initialize bee threads */
     for (i = 0; i < NUM_BEES; i++)
     {
     	thread = mythread_create(i, 4096, bee_stuff);
@@ -75,10 +75,11 @@ void os_primitive()
     	mythread_join(thread);
     }
 
+    /* initialize bear thread */
     thread = mythread_create(NUM_BEES, 4096, bear_thangs);
     mythread_start(thread);
     mythread_join(thread);
-    
+
     if ( start_alarm_succeed() )
         printf ("Started the alarm successfully\n");
     else
@@ -88,7 +89,7 @@ void os_primitive()
     while (1)
     {
         printf ("This is the OS primitive for my exciting CSE351 course projects!\n");
-        
+
         /* delay print for a while */
         for (i = 0; i < 10*MAX; i++);
     }
