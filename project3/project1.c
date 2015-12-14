@@ -31,8 +31,11 @@ void bear_thangs()
 		bear_eat_count++;
 		printf("I'm a bear and I just ate honey for the %ith time. Mmmmmmmmmmmmm, honey.\n", bear_eat_count);
 		sem_up(mutex);
-		for (i = 0; i < 10*MAX; i++);
+		for (i = 0; i < MAX; i++);
 	}
+	/* the bear has died; free semaphores */
+	sem_delete(pot_full);
+	sem_delete(mutex);
 }
 
 void bee_stuff()
@@ -52,7 +55,7 @@ void bee_stuff()
 		{
 			sem_up(mutex);
 		}
-		for (i = 0; i < 10*MAX; i++);
+		for (i = 0; i < MAX; i++);
 	}
 }
     
@@ -68,7 +71,6 @@ void os_primitive()
     for (i = 0; i < NUM_BEES; i++)
     {
     	thread = mythread_create(i, 4096, bee_stuff);
-    	printf("thread %u just created\n", thread->tid);
     	mythread_start(thread);
     	mythread_join(thread);
     }

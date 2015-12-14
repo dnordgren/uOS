@@ -30,26 +30,13 @@ sem * sem_create(int value)
 void sem_up(sem *sem)
 {
 	DISABLE_INTERRUPTS()
-	printf("Thread %u entered sem_up\n", current_running_thread->tid);
-	printf("sem value: %i\n", sem->value);
-	if (sem->value != 0)
+	sem->value++;
+	if (sem->head != NULL)
 	{
-		sem->value++;
-		printf("incremented sem value to %i\n", sem->value);
-	}
-	else /* sem value == 0 */
-	{
-		if (sem->head != NULL)
-		{
-			mythread_start(sem->head->thread); /* unblock the longest waiting thread*/
-			sem->head = sem->head->next;
-			free(sem->head); /* remove the thread from the semaphore's queue */
-		}
-		else /* queue is empty */
-		{
-			sem->value++;
-			printf("incremented sem value to %i\n", sem->value);
-		}
+		printf("unblocking thread %u\n", sem->head->thread->tid);
+		mythread_start(sem->head->thread); /* unblock the longest waiting thread*/
+		sem->head = sem->head->next;
+		free(sem->head); /* remove the thread from the semaphore's queue */
 	}
 	ENABLE_INTERRUPTS()
 }
@@ -57,12 +44,9 @@ void sem_up(sem *sem)
 void sem_down(sem *sem)
 {
 	DISABLE_INTERRUPTS()
-	printf("Thread %u entered sem_down\n", current_running_thread->tid);
-	printf("sem value: %i\n", sem->value);
 	if (sem->value > 0)
 	{
 		sem->value--;
-		printf("decremented sem value to %i\n", sem->value);
 		ENABLE_INTERRUPTS()
 	}
 	else /* down on zero; sleep the current thread */
@@ -86,12 +70,16 @@ void sem_down(sem *sem)
 		sem->wait_count++;
 		mythread_block(queue_item->thread);
 		ENABLE_INTERRUPTS()
-		while(queue_item->thread->state == BLOCKED);
+		while(sem->value == 0);
+		DISABLE_INTERRUPTS()
+		sem->value--;
+		ENABLE_INTERRUPTS()
 	}
 }
 
 void sem_delete(sem *sem)
 {
+	printf("deleted a semaphore...\n");
 	if (sem->head != NULL)
 	{
 		wait_q *current_thread = sem->head;

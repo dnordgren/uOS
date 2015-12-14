@@ -70,7 +70,6 @@ void mythread_join(tcb *thread_pointer)
 /* RUNNING ----> BLOCKED */
 void mythread_block(tcb *thread_pointer)
 {
-	printf("thread %u is now blocked\n", thread_pointer->tid);
     thread_pointer->state = BLOCKED;
 }
 
@@ -86,7 +85,10 @@ void *mythread_schedule(void *context)
     {
         if (current_running_thread != NULL)
         {
-            current_running_thread->state = READY;
+        	if (current_running_thread->state != BLOCKED)
+        	{
+        		current_running_thread->state = READY;
+        	}
             current_running_thread->stack_pointer = (unsigned int *)context;
             enqueue(current_running_thread);
         }
@@ -95,7 +97,6 @@ void *mythread_schedule(void *context)
             main_stack_pointer = (unsigned int *)context;
         }
         current_running_thread = (tcb *)dequeue();
-        printf("current running thread after dequeue: %u\n", current_running_thread->tid);
         current_running_thread->state = RUNNING;
         
         context = (void *)(current_running_thread->stack_pointer);
@@ -116,6 +117,7 @@ unsigned int mythread_isQempty()
 void mythread_cleanup()
 {
     DISABLE_INTERRUPTS();
+    printf("terminating thread %u\n", current_running_thread->tid);
     mythread_terminate(current_running_thread);
     free(current_running_thread->stack);
     free(current_running_thread);
